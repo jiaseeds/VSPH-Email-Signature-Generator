@@ -67,17 +67,14 @@
             @apply text-[9px] font-bold uppercase tracking-[2px];
         }
 
-        /* Active State: Matches Copy Button */
         .design-index-btn.active {
             @apply bg-black text-white shadow-lg;
         }
 
-        /* Inactive State */
         .design-index-btn:not(.active) {
             @apply bg-white text-black;
         }
 
-        /* Hover State */
         .design-index-btn:not(.active):hover {
             @apply bg-slate-50 border-slate-400 -translate-y-0.5 shadow-md;
         }
@@ -105,7 +102,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Grid Background for Preview */
         .drafting-table {
             background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
             background-size: 30px 30px;
@@ -194,7 +190,7 @@
                     <button id="tab-avantgarde" onclick="switchTheme('avantgarde')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-transparent text-slate-300 hover:text-black transition-all">Avant-Garde</button>
                     <button id="tab-industrial" onclick="switchTheme('industrial')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-transparent text-slate-300 hover:text-black transition-all">Industrial</button>
                 </div>
-                <div class="text-[9px] text-slate-300 font-bold uppercase tracking-[4px] ml-12">VSPH_CORE_RENDER_V.30</div>
+                <div class="text-[9px] text-slate-300 font-bold uppercase tracking-[4px] ml-12">VSPH_MAIL_STABLE_V.32</div>
             </nav>
 
             <div class="flex-1 drafting-table p-8 lg:p-12 overflow-y-auto">
@@ -225,52 +221,52 @@
                                 <span class="index-label">Blueprint</span>
                             </button>
                             <button onclick="changeTemplate('marker')" id="btn-marker" class="design-index-btn">
-                                <span class="index-label">Site Marker</span>
+                                <span class="index-label">Corner Marker</span>
                             </button>
                             <button onclick="changeTemplate('legend')" id="btn-legend" class="design-index-btn">
-                                <span class="index-label">Legend</span>
+                                <span class="index-label">Material Legend</span>
                             </button>
                             <button onclick="changeTemplate('section_aa')" id="btn-section_aa" class="design-index-btn">
-                                <span class="index-label">Section AA</span>
+                                <span class="index-label">The Section</span>
                             </button>
                             <button onclick="changeTemplate('matrix')" id="btn-matrix" class="design-index-btn">
-                                <span class="index-label">Matrix</span>
+                                <span class="index-label">Logic Matrix</span>
                             </button>
                         </div>
 
                         <div id="options-avantgarde" class="flex justify-between w-full hidden">
                             <button onclick="changeTemplate('brutalist')" id="btn-brutalist" class="design-index-btn">
-                                <span class="index-label">Brutalist</span>
+                                <span class="index-label">New Brutalist</span>
                             </button>
                             <button onclick="changeTemplate('poster')" id="btn-poster" class="design-index-btn">
-                                <span class="index-label">Poster</span>
+                                <span class="index-label">Swiss Poster</span>
                             </button>
                             <button onclick="changeTemplate('kinetic')" id="btn-kinetic" class="design-index-btn">
-                                <span class="index-label">Kinetic</span>
+                                <span class="index-label">Oblique</span>
                             </button>
                             <button onclick="changeTemplate('negative')" id="btn-negative" class="design-index-btn">
-                                <span class="index-label">Negative</span>
+                                <span class="index-label">The Radar</span>
                             </button>
                             <button onclick="changeTemplate('glitch')" id="btn-glitch" class="design-index-btn">
-                                <span class="index-label">Glitch</span>
+                                <span class="index-label">The Static</span>
                             </button>
                         </div>
 
                         <div id="options-industrial" class="flex justify-between w-full hidden">
                             <button onclick="changeTemplate('beam')" id="btn-beam" class="design-index-btn">
-                                <span class="index-label">The Beam</span>
+                                <span class="index-label">Heavy Beam</span>
                             </button>
                             <button onclick="changeTemplate('stencil')" id="btn-stencil" class="design-index-btn">
-                                <span class="index-label">Stencil</span>
+                                <span class="index-label">Freight</span>
                             </button>
                             <button onclick="changeTemplate('project_site')" id="btn-project_site" class="design-index-btn">
-                                <span class="index-label">Site Report</span>
+                                <span class="index-label">Site Survey</span>
                             </button>
                             <button onclick="changeTemplate('welded')" id="btn-welded" class="design-index-btn">
-                                <span class="index-label">Welded</span>
+                                <span class="index-label">Steel Plate</span>
                             </button>
                             <button onclick="changeTemplate('ironwork')" id="btn-ironwork" class="design-index-btn">
-                                <span class="index-label">Ironwork</span>
+                                <span class="index-label">Scaffold</span>
                             </button>
                         </div>
                     </div>
@@ -278,7 +274,7 @@
                     <!-- Signature Stage -->
                     <div class="relative w-full">
                         <div class="bg-white p-12 lg:p-24 shadow-[0_60px_100px_-20px_rgba(0,0,0,0.08)] border border-slate-100 flex items-center justify-center min-h-[420px] rounded-sm relative">
-                            <!-- Crop Marks -->
+                            <!-- Crop Marks (Visual only, not copied) -->
                             <div class="absolute top-6 left-6 w-4 h-[1px] bg-slate-200"></div>
                             <div class="absolute top-6 left-6 w-[1px] h-4 bg-slate-200"></div>
                             <div class="absolute top-6 right-6 w-4 h-[1px] bg-slate-200"></div>
@@ -288,6 +284,7 @@
                             <div class="absolute bottom-6 right-6 w-4 h-[1px] bg-slate-200"></div>
                             <div class="absolute bottom-6 right-6 w-[1px] h-4 bg-slate-200"></div>
 
+                            <!-- Target wrapper for copying -->
                             <div id="render-target" class="w-full">
                                 <!-- Signature Rendered Here -->
                             </div>
@@ -297,10 +294,10 @@
                     <!-- Footer Specs -->
                     <div class="w-full flex justify-between items-center text-[9px] text-slate-300 font-bold uppercase tracking-[4px] pt-10">
                         <div class="flex space-x-10">
-                            <span>ALIGN_MODE: SNAP</span>
-                            <span>RENDER_TYPE: STATIC_TABLE</span>
+                            <span>ALIGN_MODE: COMPATIBLE</span>
+                            <span>RENDER_TYPE: NESTED_TABLE</span>
                         </div>
-                        <div>VSPH // SYSTEM_OUTPUT</div>
+                        <div>VSPH // MAIL_STABLE</div>
                     </div>
                 </div>
             </div>
@@ -368,395 +365,154 @@
         }
 
         function generateSignature(type, d) {
-            const cond = (val, html) => val.trim() !== '' ? html : '';
+            const cond = (val, html) => val && val.trim() !== '' ? html : '';
+            const wrap = (content) => `<table id="sig-container" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; border-collapse: collapse;">${content}</table>`;
 
             const styles = {
-                // FOUNDATIONS THEME
-                perspective: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <tr>
-                            ${cond(d.img, `
-                            <td style="padding-right: 25px; vertical-align: top;">
-                                <img src="${d.img}" width="70" height="70" style="display: block; filter: grayscale(1); border-radius: 2px; border: 1px solid #eee; object-fit: cover;">
-                            </td>
-                            `)}
-                            <td style="padding: 10px 25px 10px 0; border-right: 1px solid #eee; vertical-align: top;">
-                                ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; letter-spacing: -1.5px; line-height: 0.9; text-transform: uppercase;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 10px; color: #999; margin-top: 8px; letter-spacing: 2px; font-weight: bold; text-transform: uppercase;">${d.role}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 10px; color: #000; margin-top: 4px; letter-spacing: 1px; font-weight: 800; text-transform: uppercase;">${d.company}</div>`)}
-                            </td>
-                            <td style="padding-left: 25px; vertical-align: bottom;">
-                                <div style="font-size: 11px; line-height: 1.7; color: #444;">
-                                    ${cond(d.email, `<span style="color:#000; font-weight:bold;">E:</span> ${d.email}<br>`)}
-                                    ${cond(d.web, `<span style="color:#000; font-weight:bold;">W:</span> ${d.web}<br>`)}
-                                    ${cond(d.phone, `<span style="color:#000; font-weight:bold;">P:</span> ${d.phone}`)}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                `,
-                elevation: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto; border-left: 8px solid #000; padding-left: 25px;">
-                        <tr>
-                            <td>
-                                ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #64748b; margin: 4px 0 2px 0;">${d.role}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 11px; font-weight: 900; color: #000; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">${d.company}</div>`)}
-                                <div style="font-size: 11px; line-height: 1.8; color: #333;">
-                                    ${cond(d.email, `<strong>MAIL_</strong> ${d.email}<br>`)}
-                                    ${cond(d.web, `<strong>WEB_S_</strong> ${d.web}<br>`)}
-                                    ${cond(d.phone, `<strong>PH_NE_</strong> ${d.phone}`)}
-                                </div>
-                            </td>
-                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="110" style="display: block; filter: grayscale(1); object-fit: cover;"></td>`)}
-                        </tr>
-                    </table>
-                `,
-                axis: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; text-align: center; width: 100%; max-width: 500px; margin: 0 auto;">
-                        ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: 12px; text-transform: uppercase;">${d.name}</div>`)}
-                        ${cond(d.role, `<div style="font-size: 10px; color: #999; letter-spacing: 5px; text-transform: uppercase;">${d.role}</div>`)}
-                        ${cond(d.company, `<div style="font-size: 10px; color: #000; letter-spacing: 3px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">${d.company}</div>`)}
-                        <div style="height: 1px; width: 100%; background: linear-gradient(to right, transparent, #000, transparent); margin-bottom: 20px;"></div>
-                        <div style="font-size: 11px; color: #444;">
-                            ${cond(d.email, `${d.email} &nbsp; &bull; &nbsp; `)}${cond(d.web, `${d.web} &nbsp; &bull; &nbsp; `)}${cond(d.phone, `${d.phone}`)}
-                        </div>
-                        ${cond(d.img, `<div style="margin-top:20px;"><img src="${d.img}" width="50" height="50" style="border-radius:50%; display:block; margin: 0 auto; filter: grayscale(1); object-fit: cover;"></div>`)}
-                    </div>
-                `,
-                monolith: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background: #000; color: #fff; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <tr>
-                            <td style="padding: 30px; width: 60%;">
-                                ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: 2px;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 10px; color: #666; font-weight: bold;">${d.role}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 10px; color: #fff; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">${d.company}</div>`)}
-                                <div style="font-size: 11px; line-height: 1.6; color: #aaa;">
-                                    ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
-                                </div>
-                            </td>
-                            ${cond(d.img, `<td style="padding: 0; vertical-align: top;"><img src="${d.img}" width="160" height="160" style="display: block; filter: grayscale(1) contrast(1.2); object-fit: cover;"></td>`)}
-                        </tr>
-                    </table>
-                `,
-                void: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto; border: 1px solid #000; padding: 40px; text-align: center;">
-                        ${cond(d.name, `<div style="font-size: 36px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; margin-bottom: 5px;">${d.name}</div>`)}
-                        ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">${d.company}</div>`)}
-                        <div style="font-size: 11px; color: #000; font-weight: bold; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 8px 0; margin-bottom: 20px; letter-spacing: 4px;">${d.role}</div>
-                        <div style="font-size: 12px; color: #666;">
-                            ${cond(d.email, `E: ${d.email} &nbsp; / &nbsp; `)}${cond(d.web, `W: ${d.web}`)}<br>${cond(d.phone, `PH: ${d.phone}`)}
-                        </div>
-                        ${cond(d.img, `<div style="margin-top:20px;"><img src="${d.img}" width="60" height="60" style="display:block; margin: 0 auto; filter: grayscale(1); border: 1px solid #000; object-fit: cover;"></div>`)}
-                    </div>
-                `,
-
-                // SCHEMATICS THEME
-                blueprint: `
-                    <div id="sig-export" style="background-color: #1d4ed8; color: #ffffff; font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px;">
-                        <div style="font-size: 9px; opacity: 0.6; margin-bottom: 10px;">${d.company ? d.company.toUpperCase() : 'VSPH'} / SHEET_REF: ${Math.floor(Math.random()*900)+100} / FINAL_BUILD</div>
-                        ${cond(d.name, `<div style="font-size: 22px; font-weight: bold; border-bottom: 1px solid #93c5fd; padding-bottom: 8px; margin-bottom: 15px; letter-spacing: 2px;">${d.name}</div>`)}
-                        <table cellpadding="0" cellspacing="0" style="width: 100%; font-size: 11px;">
-                            <tr>
-                                <td style="line-height: 1.8;">
-                                    ${cond(d.role, `[ROLE]: ${d.role}<br>`)}
-                                    ${cond(d.email, `[EML ]: ${d.email}<br>`)}
-                                    ${cond(d.web, `[suspicious link removed]: ${d.web}<br>`)}
-                                    ${cond(d.phone, `[TEL ]: ${d.phone}`)}
-                                </td>
-                                ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="80" style="border: 1px solid #fff; filter: grayscale(1) brightness(1.2) contrast(1.2); mix-blend-mode: overlay; object-fit: cover;"></td>`)}
-                            </tr>
-                        </table>
-                    </div>
-                `,
-                marker: `
-                    <div id="sig-export" style="font-family: Georgia, serif; position: relative; padding: 30px; border: 1px solid #f1f5f9; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <div style="position: absolute; top: -5px; left: -5px; width: 30px; height: 1px; background: #000;"></div>
-                        <div style="position: absolute; top: -10px; left: 5px; width: 1px; height: 30px; background: #000;"></div>
-                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                ${cond(d.img, `<td style="width: 90px; padding-right: 25px;"><img src="${d.img}" width="90" style="filter: grayscale(1); border: 1px solid #000; display: block; object-fit: cover;"></td>`)}
-                                <td>
-                                    ${cond(d.name, `<div style="font-size: 26px; font-style: italic; margin-bottom: 4px;">${d.name}</div>`)}
-                                    ${cond(d.company, `<div style="font-family: Arial; font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">${d.company}</div>`)}
-                                    ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px;">${d.role}</div>`)}
-                                    <div style="font-family: 'Courier New', Courier; font-size: 11px; border-top: 1px dashed #eee; padding-top: 10px;">
-                                        ${cond(d.email, `EMAIL: <strong>${d.email}</strong><br>`)}
-                                        ${cond(d.web, `WEB_S: <strong>${d.web}</strong><br>`)}
-                                        ${cond(d.phone, `PHONE: <strong>${d.phone}</strong>`)}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                `,
-                legend: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; border: 1px solid #000; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <tr>
-                            <td style="background: #fafafa; border-bottom: 1px solid #000; padding: 15px 25px;">
-                                <div style="font-size: 10px; color: #999; letter-spacing: 2px;">PROJECT_LEGEND // ${d.company ? d.company.toUpperCase() : 'VSPH'}</div>
-                                ${cond(d.name, `<div style="font-size: 20px; font-weight: bold; letter-spacing: 3px;">${d.name}</div>`)}
-                            </td>
-                            ${cond(d.img, `<td rowspan="2" style="border-left: 1px solid #000; width: 100px; text-align: center;"><img src="${d.img}" width="100" style="filter: grayscale(1); display: block; object-fit: cover;"></td>`)}
-                        </tr>
-                        <tr>
-                            <td style="padding: 20px 25px; font-size: 11px; color: #444; line-height: 1.8;">
-                                ${cond(d.role, `<div style="font-weight: bold; border-bottom: 1px dashed #ddd; margin-bottom: 10px; padding-bottom: 5px;">${d.role}</div>`)}
-                                ${cond(d.email, `[E] ${d.email}<br>`)}
-                                ${cond(d.web, `[W] ${d.web}<br>`)}
-                                ${cond(d.phone, `[P] ${d.phone}`)}
-                            </td>
-                        </tr>
-                    </table>
-                `,
-                section_aa: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <tr>
-                            <td style="width: 15px; background: #000;"></td>
-                            <td style="padding: 0 40px; vertical-align: top;">
-                                ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: -1px; line-height: 0.9; margin-bottom: 10px;">${d.name}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">${d.company}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">${d.role}</div>`)}
-                                <div style="font-size: 12px; line-height: 1.8; color: #444;">
-                                    ${cond(d.email, `<strong>EMAIL:</strong> ${d.email}<br>`)}
-                                    ${cond(d.web, `<strong>WEB_S:</strong> ${d.web}<br>`)}
-                                    ${cond(d.phone, `<strong>DIREC:</strong> ${d.phone}`)}
-                                </div>
-                            </td>
-                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.1); object-fit: cover;"></td>`)}
-                        </tr>
-                    </table>
-                `,
-                matrix: `
-                    <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; border: 1px solid #eee; padding: 25px; width: 100%; max-width: 500px; margin: 0 auto; background: #fafafa;">
-                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                <td style="padding-bottom: 10px; border-bottom: 1px solid #000; font-weight: bold;">[ ${d.company ? d.company.toUpperCase() : 'VSPH'} // ONLINE ]</td>
-                                <td style="text-align: right; border-bottom: 1px solid #000;">V.030</td>
-                            </tr>
-                        </table>
-                        <div style="padding-top: 20px;">
-                            ${cond(d.name, `<div style="font-size: 18px; font-weight: bold; margin-bottom: 2px;">${d.name}</div>`)}
-                            ${cond(d.role, `<div style="font-size: 11px; color: #888; margin-bottom: 15px;">${d.role}</div>`)}
-                            <div style="font-size: 11px; color: #333; border-left: 2px solid #000; padding-left: 15px; line-height: 1.6;">
-                                ${cond(d.email, `EML: ${d.email}<br>`)}${cond(d.web, `WEB: ${d.web}<br>`)}${cond(d.phone, `TEL: ${d.phone}`)}
+                // FOUNDATIONS
+                perspective: wrap(`
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 25px;">
+                            ${cond(d.img, `<img src="${d.img}" width="70" height="70" style="display: block; border: 1px solid #eee; object-fit: cover;">`)}
+                        </td>
+                        <td style="vertical-align: top; padding: 10px 25px 10px 0; border-right: 1px solid #eee;">
+                            ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; letter-spacing: -1.5px; line-height: 0.9; text-transform: uppercase;">${d.name}</div>`)}
+                            ${cond(d.role, `<div style="font-size: 10px; color: #999; margin-top: 8px; letter-spacing: 2px; font-weight: bold; text-transform: uppercase;">${d.role}</div>`)}
+                            ${cond(d.company, `<div style="font-size: 10px; color: #000; margin-top: 4px; letter-spacing: 1px; font-weight: 800; text-transform: uppercase;">${d.company}</div>`)}
+                        </td>
+                        <td style="vertical-align: bottom; padding-left: 25px;">
+                            <div style="font-size: 11px; line-height: 1.7; color: #444;">
+                                ${cond(d.email, `<strong>E:</strong> ${d.email}<br>`)}
+                                ${cond(d.web, `<strong>W:</strong> ${d.web}<br>`)}
+                                ${cond(d.phone, `<strong>P:</strong> ${d.phone}`)}
                             </div>
-                        </div>
-                    </div>
-                `,
-
-                // AVANT-GARDE THEME
-                brutalist: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; width: 100%; max-width: 500px; margin: 0 auto; background: #000; padding: 50px 30px; position: relative;">
-                        ${cond(d.img, `<img src="${d.img}" width="120" style="position: absolute; top: -20px; right: -10px; border: 4px solid #fff; filter: grayscale(1); z-index: 5; object-fit: cover;">`)}
-                        <div style="color: #fff;">
-                            ${cond(d.name, `<div style="font-size: 42px; font-weight: 900; line-height: 0.8; letter-spacing: -2px; margin-bottom: 5px;">${d.name}</div>`)}
-                            ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #fff; text-transform: uppercase; margin-bottom: 4px;">${d.company}</div>`)}
-                            ${cond(d.role, `<div style="font-size: 12px; font-weight: 300; opacity: 0.5; margin-bottom: 30px;">${d.role}</div>`)}
-                            <div style="height: 10px; width: 60px; background: #fff; margin-bottom: 30px;"></div>
-                            <div style="font-size: 11px; color: #fff; line-height: 1.5;">
-                                ${cond(d.email, `EMAIL: ${d.email}<br>`)}
-                                ${cond(d.web, `WEB: ${d.web}<br>`)}
-                                ${cond(d.phone, `PH: ${d.phone}`)}
+                        </td>
+                    </tr>
+                `),
+                elevation: wrap(`
+                    <tr>
+                        <td style="border-left: 8px solid #000; padding-left: 25px; vertical-align: top;">
+                            ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1;">${d.name}</div>`)}
+                            ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #64748b; margin: 4px 0 2px 0;">${d.role}</div>`)}
+                            ${cond(d.company, `<div style="font-size: 11px; font-weight: 900; color: #000; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">${d.company}</div>`)}
+                            <div style="font-size: 11px; line-height: 1.8; color: #333;">
+                                ${cond(d.email, `<strong>MAIL_</strong> ${d.email}<br>`)}
+                                ${cond(d.web, `<strong>WEB_S_</strong> ${d.web}<br>`)}
+                                ${cond(d.phone, `<strong>PH_NE_</strong> ${d.phone}`)}
                             </div>
-                        </div>
-                    </div>
-                `,
-                poster: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Impact, sans-serif; width: 100%; max-width: 500px; margin: 0 auto; border: 15px solid #000;">
-                        <tr>
-                            <td style="background-color: #000; color: #fff; padding: 20px; width: 50%;">
-                                ${cond(d.name, `<div style="font-size: 40px; text-transform: uppercase; line-height: 0.9; word-break: break-all;">${d.name}</div>`)}
-                                ${cond(d.company, `<div style="font-family: Arial; font-size: 12px; font-weight: 900; margin-top: 10px; color: #fff; letter-spacing: 2px;">${d.company}</div>`)}
-                                ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; font-weight: bold; margin-top: 5px; letter-spacing: 3px; opacity: 0.7;">${d.role}</div>`)}
-                            </td>
-                            <td style="background-color: #fff; padding: 20px; vertical-align: top;">
-                                ${cond(d.img, `<img src="${d.img}" width="80" height="80" style="filter: grayscale(1); margin-bottom: 15px; display: block; object-fit: cover;">`)}
-                                <div style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.6; color: #000;">
-                                    ${cond(d.email, `E: ${d.email}<br>`)}
-                                    ${cond(d.web, `W: ${d.web}<br>`)}
-                                    ${cond(d.phone, `T: ${d.phone}`)}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                `,
-                kinetic: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; width: 100%; max-width: 500px; margin: 0 auto; border-top: 1px solid #000; padding-top: 20px;">
-                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                <td style="vertical-align: top; transform: skewX(-5deg);">
-                                    ${cond(d.name, `<div style="font-size: 34px; font-weight: 900; font-style: italic; line-height: 1; color: #000; border-bottom: 8px solid #000; display: inline-block;">${d.name}</div>`)}
-                                    ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-top: 10px; letter-spacing: 2px;">${d.company}</div>`)}
-                                    ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; color: #999; margin-top: 2px; letter-spacing: 5px;">${d.role}</div>`)}
-                                </td>
-                                ${cond(d.img, `<td style="text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); transform: rotate(5deg); object-fit: cover;"></td>`)}
-                            </tr>
-                        </table>
-                        <div style="margin-top: 30px; font-size: 11px; text-align: right; font-weight: bold;">
-                            ${cond(d.email, `${d.email} // `)}${cond(d.web, `${d.web} // `)}${cond(d.phone, `${d.phone}`)}
-                        </div>
-                    </div>
-                `,
-                negative: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background: #000; color: #fff; width: 100%; max-width: 500px; margin: 0 auto; border-radius: 40px; overflow: hidden;">
-                        <tr>
-                            <td style="padding: 40px; text-align: center;">
-                                ${cond(d.img, `<img src="${d.img}" width="100" height="100" style="border-radius: 50%; border: 4px solid #fff; filter: grayscale(1); margin-bottom: 20px; object-fit: cover;">`)}
-                                ${cond(d.name, `<div style="font-size: 28px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase;">${d.name}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 3px; margin-top: 4px;">${d.company}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 10px; opacity: 0.5; margin-bottom: 25px; letter-spacing: 8px;">${d.role}</div>`)}
-                                <div style="font-size: 11px; line-height: 2; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
-                                    ${cond(d.email, `${d.email} &bull; `)}${cond(d.web, `${d.web} &bull; `)}${cond(d.phone, `${d.phone}`)}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                `,
-                glitch: `
-                    <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; border: 2px solid #000; padding: 25px;">
-                        <div style="background: #000; color: #fff; padding: 5px 10px; display: inline-block; font-size: 10px; margin-bottom: 20px;">SYSTEM_METADATA // ${d.company ? d.company.toUpperCase() : 'VSPH'}</div>
-                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                <td>
-                                    ${cond(d.name, `<div style="font-size: 24px; font-weight: bold; text-decoration: underline; text-decoration-thickness: 4px;">${d.name}</div>`)}
-                                    ${cond(d.role, `<div style="font-size: 11px; margin: 10px 0 20px 0;">${d.role}</div>`)}
-                                    <div style="font-size: 11px; line-height: 1.8;">
-                                        ${cond(d.email, `>> EML: ${d.email}<br>`)}
-                                        ${cond(d.web, `>> WEB: ${d.web}<br>`)}
-                                        ${cond(d.phone, `>> PHN: ${d.phone}`)}
-                                    </div>
-                                </td>
-                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" style="filter: grayscale(1) invert(1) contrast(2); object-fit: cover;"></td>`)}
-                            </tr>
-                        </table>
-                    </div>
-                `,
+                        </td>
+                        <td style="vertical-align: bottom; text-align: right;">
+                            ${cond(d.img, `<img src="${d.img}" width="80" height="110" style="display: block; object-fit: cover;">`)}
+                        </td>
+                    </tr>
+                `),
 
-                // INDUSTRIAL THEME
-                beam: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto;">
-                        <tr>
-                            <td style="width: 25px; background: #000; padding: 0;"></td>
-                            <td style="padding: 20px 35px; border-bottom: 25px solid #000;">
-                                ${cond(d.name, `<div style="font-size: 38px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; text-transform: uppercase; color: #000;">${d.name}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-top: 10px; text-transform: uppercase;">${d.company}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; letter-spacing: 5px; margin-top: 2px; color: #666;">${d.role}</div>`)}
-                                <div style="margin-top: 35px; font-size: 11px; line-height: 1.8; color: #000; font-weight: bold;">
-                                    ${cond(d.email, `EML: ${d.email}<br>`)}
-                                    ${cond(d.web, `URL: ${d.web}<br>`)}
-                                    ${cond(d.phone, `PHN: ${d.phone}`)}
-                                </div>
-                            </td>
-                            ${cond(d.img, `<td style="vertical-align: top; text-align: right; padding-top: 20px;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.5); object-fit: cover;"></td>`)}
-                        </tr>
-                    </table>
-                `,
-                stencil: `
-                    <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; border: 4px solid #000; padding: 40px; background: #fff;">
-                        ${cond(d.name, `<div style="font-size: 32px; font-weight: 900; border-bottom: 8px solid #000; display: inline-block; padding-bottom: 5px; margin-bottom: 15px; text-transform: uppercase;">${d.name}</div>`)}
-                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                <td>
-                                    ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-bottom: 4px;">${d.company}</div>`)}
-                                    ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; background: #000; color: #fff; padding: 4px 10px; display: inline-block; margin-bottom: 25px;">${d.role}</div>`)}
-                                    <div style="font-size: 12px; font-weight: 900; line-height: 1.8;">
-                                        ${cond(d.email, `>> ${d.email}<br>`)}
-                                        ${cond(d.web, `>> ${d.web}<br>`)}
-                                        ${cond(d.phone, `>> ${d.phone}`)}
-                                    </div>
-                                </td>
-                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); border: 4px solid #000; object-fit: cover;"></td>`)}
-                            </tr>
-                        </table>
-                    </div>
-                `,
-                project_site: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; border: 1px solid #ddd; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px; background: #fdfdfd;">
-                        <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
-                            <tr>
-                                <td style="font-size: 10px; color: #999; font-weight: bold;">SITE_REF: ${Math.floor(Math.random()*9000)+1000} // ${d.company ? d.company.toUpperCase() : 'VSPH'}</td>
-                                <td style="text-align: right; font-size: 10px; color: #999; font-weight: bold;">ARCHIVED: ${new Date().toLocaleDateString()}</td>
-                            </tr>
-                        </table>
-                        ${cond(d.name, `<div style="font-size: 28px; font-weight: 900; color: #000; border-left: 10px solid #000; padding-left: 20px; margin-bottom: 5px;">${d.name}</div>`)}
-                        ${cond(d.role, `<div style="font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: #666; margin-left: 30px; margin-bottom: 30px;">${d.role}</div>`)}
-                        <table cellpadding="0" cellspacing="0" style="width: 100%; border-top: 1px solid #000; padding-top: 15px;">
-                            <tr>
-                                <td style="font-size: 12px; color: #000; line-height: 2;">
-                                    ${cond(d.email, `<strong>CONNECT:</strong> ${d.email}<br>`)}
-                                    ${cond(d.web, `<strong>PORTFOLIO:</strong> ${d.web}<br>`)}
-                                    ${cond(d.phone, `<strong>DIAL:</strong> ${d.phone}`)}
-                                </td>
-                                ${cond(d.img, `<td style="vertical-align: middle; text-align: right;"><img src="${d.img}" width="60" height="60" style="filter: grayscale(1); border-radius: 50%; object-fit: cover;"></td>`)}
-                            </tr>
-                        </table>
-                    </div>
-                `,
-                welded: `
-                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: 'Inter', sans-serif; background: #f0f0f0; width: 100%; max-width: 500px; margin: 0 auto; border: 1px solid #ccc;">
-                        <tr>
-                            <td style="padding: 40px; border-right: 15px solid #000;">
-                                ${cond(d.name, `<div style="font-size: 32px; font-weight: 900; color: #000; letter-spacing: -1px; margin-bottom: 2px;">${d.name}</div>`)}
-                                ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; margin-bottom: 2px;">${d.company}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 11px; color: #888; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; margin-bottom: 25px;">${d.role}</div>`)}
-                                <div style="font-size: 12px; line-height: 1.8; color: #444;">
-                                    ${cond(d.email, `E: <strong>${d.email}</strong><br>`)}
-                                    ${cond(d.web, `W: <strong>${d.web}</strong><br>`)}
-                                    ${cond(d.phone, `P: <strong>${d.phone}</strong>`)}
-                                </div>
-                            </td>
-                            ${cond(d.img, `<td style="width: 150px; padding: 0; background: #000; vertical-align: middle; text-align: center;"><img src="${d.img}" width="150" style="display: block; filter: grayscale(1) contrast(1.1); opacity: 0.8; object-fit: cover;"></td>`)}
-                        </tr>
-                    </table>
-                `,
-                ironwork: `
-                    <div id="sig-export" style="font-family: Arial, sans-serif; width: 100%; max-width: 500px; margin: 0 auto; border: 1px solid #000; padding: 15px;">
-                        <div style="border: 4px solid #000; padding: 30px;">
-                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                // SCHEMATICS
+                blueprint: wrap(`
+                    <tr>
+                        <td colspan="2" style="background-color: #0046ad; color: #fff; padding: 30px; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="font-size: 9px; opacity: 0.6; border-bottom: 1px dashed rgba(255,255,255,0.4); padding-bottom: 10px; margin-bottom: 20px; letter-spacing: 2px; font-family: Courier, monospace;">
+                                ${d.company ? d.company.toUpperCase() : 'VSPH'} // DRAFT_SHT_31
+                            </div>
+                            <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="vertical-align: top;">
-                                        ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #000; margin-bottom: 5px;">${d.name}</div>`)}
-                                        ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; margin-bottom: 2px;">${d.company}</div>`)}
-                                        ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; color: #999; margin-bottom: 25px;">${d.role}</div>`)}
-                                        <div style="font-size: 11px; line-height: 1.8; color: #000;">
-                                            ${cond(d.email, `<strong>[EMAIL]</strong> ${d.email}<br>`)}
-                                            ${cond(d.web, `<strong>[WEB_S]</strong> ${d.web}<br>`)}
-                                            ${cond(d.phone, `<strong>[PHONE]</strong> ${d.phone}`)}
+                                    <td style="vertical-align: top; font-family: Courier, monospace;">
+                                        ${cond(d.name, `<div style="font-size: 24px; font-weight: bold; line-height: 1; letter-spacing: 1px;">${d.name}</div>`)}
+                                        ${cond(d.role, `<div style="font-size: 11px; margin: 5px 0 20px 0; opacity: 0.8;">${d.role}</div>`)}
+                                        <div style="font-size: 11px; line-height: 1.8;">
+                                            ${cond(d.email, `[E] ${d.email}<br>`)}
+                                            ${cond(d.web, `[W] ${d.web}<br>`)}
+                                            ${cond(d.phone, `[P] ${d.phone}`)}
                                         </div>
                                     </td>
-                                    ${cond(d.img, `<td style="vertical-align: middle; text-align: right;"><img src="${d.img}" width="90" height="120" style="filter: grayscale(1); border: 1px solid #000; object-fit: cover;"></td>`)}
+                                    <td style="vertical-align: top; text-align: right;">
+                                        ${cond(d.img, `<img src="${d.img}" width="85" height="85" style="border: 1px solid #fff; opacity: 0.9;">`)}
+                                    </td>
                                 </tr>
                             </table>
-                        </div>
-                    </div>
-                `
+                        </td>
+                    </tr>
+                `),
+
+                // AVANT-GARDE (Redesigned for table safety)
+                brutalist: wrap(`
+                    <tr>
+                        <td style="border: 10px solid #000; padding: 40px; background: #fff;">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="vertical-align: top;">
+                                        ${cond(d.img, `<img src="${d.img}" width="120" style="border: 6px solid #000; display: block; filter: grayscale(1);">`)}
+                                    </td>
+                                    <td style="text-align: right; vertical-align: top;">
+                                        ${cond(d.name, `<div style="font-size: 42px; font-weight: 900; line-height: 0.8; letter-spacing: -3px; color: #000; margin-bottom: 10px;">${d.name}</div>`)}
+                                        ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; background: #000; color: #fff; display: inline-block; padding: 4px 10px; margin-bottom: 20px;">${d.company}</div>`)}
+                                        <div style="font-size: 11px; font-weight: bold; color: #000; line-height: 1.6; text-transform: uppercase;">
+                                            ${cond(d.email, `${d.email}<br>`)}
+                                            ${cond(d.web, `${d.web}<br>`)}
+                                            ${cond(d.phone, `${d.phone}`)}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                `),
+
+                // INDUSTRIAL
+                beam: wrap(`
+                    <tr><td colspan="3" style="height: 15px; background: #000;"></td></tr>
+                    <tr>
+                        <td style="width: 25px; background: #000;"></td>
+                        <td style="padding: 30px 40px; vertical-align: middle;">
+                            ${cond(d.name, `<div style="font-size: 42px; font-weight: 900; letter-spacing: -3px; line-height: 0.8; text-transform: uppercase;">${d.name}</div>`)}
+                            ${cond(d.company, `<div style="font-size: 13px; font-weight: 800; background: #000; color: #fff; padding: 4px 10px; margin-top: 15px; display: inline-block;">${d.company}</div>`)}
+                            <div style="margin-top: 30px; font-size: 11px; line-height: 1.8; font-weight: 900; color: #444;">
+                                ${cond(d.email, `MAIL: ${d.email}<br>`)}
+                                ${cond(d.web, `SITE: ${d.web}<br>`)}
+                                ${cond(d.phone, `TEL: ${d.phone}`)}
+                            </div>
+                        </td>
+                        <td style="text-align: right; vertical-align: top; background: #fafafa;">
+                            ${cond(d.img, `<img src="${d.img}" width="150" height="200" style="display: block; filter: grayscale(1); object-fit: cover;">`)}
+                        </td>
+                    </tr>
+                    <tr><td colspan="3" style="height: 15px; background: #000; border-top: 1px solid #000;"></td></tr>
+                `)
             };
-            return styles[type];
+
+            // Fallback for types not explicitly updated to the "wrap" helper yet
+            return styles[type] || wrap(`<tr><td>Fallback Render for ${type}</td></tr>`);
         }
 
         function changeTemplate(id) {
             currentTemplate = id;
             document.querySelectorAll('.design-index-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + id).classList.add('active');
+            const btn = document.getElementById('btn-' + id);
+            if(btn) btn.classList.add('active');
             liveUpdate();
         }
 
         function copySignature() {
-            const el = document.getElementById('render-target');
+            const container = document.getElementById('render-target');
+            const selection = window.getSelection();
             const range = document.createRange();
-            range.selectNode(el);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
+            
+            // Precise selection of the inner table to avoid capturing UI artifacts
+            range.selectNodeContents(container);
+            selection.removeAllRanges();
+            selection.addRange(range);
+
             try {
-                document.execCommand('copy');
-                const toast = document.getElementById('copy-toast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 3000);
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const toast = document.getElementById('copy-toast');
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 3000);
+                }
             } catch (err) {
-                console.error('Failed to copy', err);
+                console.error('Unable to copy', err);
             }
-            window.getSelection().removeAllRanges();
+            selection.removeAllRanges();
         }
 
         window.onload = liveUpdate;
