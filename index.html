@@ -281,13 +281,20 @@
         }
 
         function liveUpdate() {
+            let imgUrl = document.getElementById('in-img').value;
+            
+            // Automatic Dropbox Link Fix
+            if (imgUrl.includes('dropbox.com') && !imgUrl.includes('dl.dropboxusercontent.com')) {
+                imgUrl = imgUrl.replace('www.dropbox.com', 'dl.dropboxusercontent.com').split('?')[0];
+            }
+
             const data = {
                 name: document.getElementById('in-name').value,
                 role: document.getElementById('in-role').value,
                 email: document.getElementById('in-email').value,
                 web: document.getElementById('in-web').value,
                 phone: document.getElementById('in-phone').value,
-                img: document.getElementById('in-img').value
+                img: imgUrl
             };
 
             const target = document.getElementById('render-target');
