@@ -159,8 +159,15 @@
                 <section class="space-y-6 pb-10">
                     <h2 class="text-[10px] font-black uppercase tracking-[3px] text-black opacity-30">Visual Assets</h2>
                     <div class="input-wrapper">
-                        <label>Portrait URL</label>
-                        <input type="text" id="in-img" class="custom-input" value="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&h=200&auto=format&fit=crop" oninput="liveUpdate()">
+                        <label>Upload Portrait</label>
+                        <input type="file" id="in-file" class="hidden" accept="image/*" onchange="handleFileUpload(this)">
+                        <button onclick="document.getElementById('in-file').click()" class="w-full bg-slate-100 text-slate-600 py-3 rounded-md text-[10px] font-bold uppercase tracking-widest hover:bg-slate-200 transition-all border border-dashed border-slate-300">
+                            Choose Image File
+                        </button>
+                    </div>
+                    <div class="input-wrapper mt-4">
+                        <label>Or Portrait URL</label>
+                        <input type="text" id="in-img" class="custom-input" placeholder="https://..." oninput="handleUrlInput()">
                     </div>
                 </section>
             </div>
@@ -263,38 +270,53 @@
     <script>
         let currentTemplate = 'perspective';
         let currentTheme = 'foundations';
+        let activeImageUrl = 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&h=200&auto=format&fit=crop';
 
         function switchTheme(theme) {
             currentTheme = theme;
-            
             const tabs = ['foundations', 'schematics'];
             tabs.forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 const isActive = t === theme;
                 el.className = `text-[10px] font-black uppercase tracking-widest h-full border-b-2 transition-all ${isActive ? 'border-black text-black' : 'border-transparent text-slate-300 hover:text-black'}`;
-                
                 document.getElementById(`options-${t}`).classList.toggle('hidden', !isActive);
             });
-
             const firstTemplate = theme === 'foundations' ? 'perspective' : 'blueprint';
             changeTemplate(firstTemplate);
         }
 
-        function liveUpdate() {
-            let imgUrl = document.getElementById('in-img').value;
-            
-            // Automatic Dropbox Link Fix
-            if (imgUrl.includes('dropbox.com') && !imgUrl.includes('dl.dropboxusercontent.com')) {
-                imgUrl = imgUrl.replace('www.dropbox.com', 'dl.dropboxusercontent.com').split('?')[0];
+        function handleFileUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    activeImageUrl = e.target.result;
+                    document.getElementById('in-img').value = ''; // Clear URL input if file is used
+                    liveUpdate();
+                };
+                reader.readAsDataURL(input.files[0]);
             }
+        }
 
+        function handleUrlInput() {
+            let imgUrl = document.getElementById('in-img').value;
+            if (imgUrl.trim() !== '') {
+                // Automatic Dropbox Link Fix
+                if (imgUrl.includes('dropbox.com') && !imgUrl.includes('dl.dropboxusercontent.com')) {
+                    imgUrl = imgUrl.replace('www.dropbox.com', 'dl.dropboxusercontent.com').split('?')[0];
+                }
+                activeImageUrl = imgUrl;
+                liveUpdate();
+            }
+        }
+
+        function liveUpdate() {
             const data = {
                 name: document.getElementById('in-name').value,
                 role: document.getElementById('in-role').value,
                 email: document.getElementById('in-email').value,
                 web: document.getElementById('in-web').value,
                 phone: document.getElementById('in-phone').value,
-                img: imgUrl
+                img: activeImageUrl
             };
 
             const target = document.getElementById('render-target');
@@ -305,13 +327,12 @@
             const cond = (val, html) => val.trim() !== '' ? html : '';
 
             const styles = {
-                // FOUNDATIONS THEME
                 perspective: `
                     <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto;">
                         <tr>
                             ${cond(d.img, `
                             <td style="padding-right: 25px; vertical-align: top;">
-                                <img src="${d.img}" width="70" height="70" style="display: block; filter: grayscale(1); border-radius: 2px; border: 1px solid #eee;">
+                                <img src="${d.img}" width="70" height="70" style="display: block; filter: grayscale(1); border-radius: 2px; border: 1px solid #eee; object-fit: cover;">
                             </td>
                             `)}
                             <td style="padding: 10px 25px 10px 0; border-right: 1px solid #eee; vertical-align: top;">
@@ -340,7 +361,7 @@
                                     ${cond(d.phone, `<strong>PH_NE_</strong> ${d.phone}`)}
                                 </div>
                             </td>
-                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="110" style="display: block; filter: grayscale(1);"></td>`)}
+                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="110" style="display: block; filter: grayscale(1); object-fit: cover;"></td>`)}
                         </tr>
                     </table>
                 `,
@@ -352,6 +373,7 @@
                         <div style="font-size: 11px; color: #444;">
                             ${cond(d.email, `${d.email} &nbsp; &bull; &nbsp; `)}${cond(d.web, `${d.web} &nbsp; &bull; &nbsp; `)}${cond(d.phone, `${d.phone}`)}
                         </div>
+                        ${cond(d.img, `<div style="margin-top:20px;"><img src="${d.img}" width="50" height="50" style="border-radius:50%; display:block; margin: 0 auto; filter: grayscale(1); object-fit: cover;"></div>`)}
                     </div>
                 `,
                 monolith: `
@@ -364,7 +386,7 @@
                                     ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
                                 </div>
                             </td>
-                            ${cond(d.img, `<td style="padding: 0; vertical-align: top;"><img src="${d.img}" width="160" height="160" style="display: block; filter: grayscale(1) contrast(1.2);"></td>`)}
+                            ${cond(d.img, `<td style="padding: 0; vertical-align: top;"><img src="${d.img}" width="160" height="160" style="display: block; filter: grayscale(1) contrast(1.2); object-fit: cover;"></td>`)}
                         </tr>
                     </table>
                 `,
@@ -375,10 +397,9 @@
                         <div style="font-size: 12px; color: #666;">
                             ${cond(d.email, `E: ${d.email} &nbsp; / &nbsp; `)}${cond(d.web, `W: ${d.web}`)}<br>${cond(d.phone, `PH: ${d.phone}`)}
                         </div>
+                        ${cond(d.img, `<div style="margin-top:20px;"><img src="${d.img}" width="60" height="60" style="display:block; margin: 0 auto; filter: grayscale(1); border: 1px solid #000; object-fit: cover;"></div>`)}
                     </div>
                 `,
-
-                // SCHEMATICS THEME
                 blueprint: `
                     <div id="sig-export" style="background-color: #1d4ed8; color: #ffffff; font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px;">
                         <div style="font-size: 9px; opacity: 0.6; margin-bottom: 10px;">SHEET_REF: ${Math.floor(Math.random()*900)+100} / FINAL_BUILD</div>
@@ -391,7 +412,7 @@
                                     ${cond(d.web, `[suspicious link removed]: ${d.web}<br>`)}
                                     ${cond(d.phone, `[TEL ]: ${d.phone}`)}
                                 </td>
-                                ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="80" style="border: 1px solid #fff; filter: grayscale(1) brightness(1.2) contrast(1.2); mix-blend-mode: overlay;"></td>`)}
+                                ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="80" style="border: 1px solid #fff; filter: grayscale(1) brightness(1.2) contrast(1.2); mix-blend-mode: overlay; object-fit: cover;"></td>`)}
                             </tr>
                         </table>
                     </div>
@@ -402,7 +423,7 @@
                         <div style="position: absolute; top: -10px; left: 5px; width: 1px; height: 30px; background: #000;"></div>
                         <table cellpadding="0" cellspacing="0" style="width: 100%;">
                             <tr>
-                                ${cond(d.img, `<td style="width: 90px; padding-right: 25px;"><img src="${d.img}" width="90" style="filter: grayscale(1); border: 1px solid #000; display: block;"></td>`)}
+                                ${cond(d.img, `<td style="width: 90px; padding-right: 25px;"><img src="${d.img}" width="90" style="filter: grayscale(1); border: 1px solid #000; display: block; object-fit: cover;"></td>`)}
                                 <td>
                                     ${cond(d.name, `<div style="font-size: 26px; font-style: italic; margin-bottom: 4px;">${d.name}</div>`)}
                                     ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px;">${d.role}</div>`)}
@@ -423,7 +444,7 @@
                                 <div style="font-size: 10px; color: #999; letter-spacing: 2px;">PROJECT_LEGEND</div>
                                 ${cond(d.name, `<div style="font-size: 20px; font-weight: bold; letter-spacing: 3px;">${d.name}</div>`)}
                             </td>
-                            ${cond(d.img, `<td rowspan="2" style="border-left: 1px solid #000; width: 100px; text-align: center;"><img src="${d.img}" width="100" style="filter: grayscale(1); display: block;"></td>`)}
+                            ${cond(d.img, `<td rowspan="2" style="border-left: 1px solid #000; width: 100px; text-align: center;"><img src="${d.img}" width="100" style="filter: grayscale(1); display: block; object-fit: cover;"></td>`)}
                         </tr>
                         <tr>
                             <td style="padding: 20px 25px; font-size: 11px; color: #444; line-height: 1.8;">
@@ -448,7 +469,7 @@
                                     ${cond(d.phone, `<strong>DIREC:</strong> ${d.phone}`)}
                                 </div>
                             </td>
-                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.1);"></td>`)}
+                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.1); object-fit: cover;"></td>`)}
                         </tr>
                     </table>
                 `,
@@ -481,7 +502,7 @@
         }
 
         function copySignature() {
-            const el = document.getElementById('sig-export');
+            const el = document.getElementById('render-target');
             const range = document.createRange();
             range.selectNode(el);
             window.getSelection().removeAllRanges();
