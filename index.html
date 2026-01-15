@@ -136,6 +136,10 @@
                         <label>Job Title</label>
                         <input type="text" id="in-role" class="custom-input" value="PRINCIPAL ARCHITECT" oninput="liveUpdate()">
                     </div>
+                    <div class="input-wrapper">
+                        <label>Company Name</label>
+                        <input type="text" id="in-company" class="custom-input" value="VSPH DESIGNS" oninput="liveUpdate()">
+                    </div>
                 </section>
 
                 <!-- Connectivity Group -->
@@ -190,7 +194,7 @@
                     <button id="tab-avantgarde" onclick="switchTheme('avantgarde')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-transparent text-slate-300 hover:text-black transition-all">Avant-Garde</button>
                     <button id="tab-industrial" onclick="switchTheme('industrial')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-transparent text-slate-300 hover:text-black transition-all">Industrial</button>
                 </div>
-                <div class="text-[9px] text-slate-300 font-bold uppercase tracking-[4px] ml-12">VSPH_CORE_RENDER_V.29</div>
+                <div class="text-[9px] text-slate-300 font-bold uppercase tracking-[4px] ml-12">VSPH_CORE_RENDER_V.30</div>
             </nav>
 
             <div class="flex-1 drafting-table p-8 lg:p-12 overflow-y-auto">
@@ -352,6 +356,7 @@
             const data = {
                 name: document.getElementById('in-name').value,
                 role: document.getElementById('in-role').value,
+                company: document.getElementById('in-company').value,
                 email: document.getElementById('in-email').value,
                 web: document.getElementById('in-web').value,
                 phone: document.getElementById('in-phone').value,
@@ -378,6 +383,7 @@
                             <td style="padding: 10px 25px 10px 0; border-right: 1px solid #eee; vertical-align: top;">
                                 ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; letter-spacing: -1.5px; line-height: 0.9; text-transform: uppercase;">${d.name}</div>`)}
                                 ${cond(d.role, `<div style="font-size: 10px; color: #999; margin-top: 8px; letter-spacing: 2px; font-weight: bold; text-transform: uppercase;">${d.role}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 10px; color: #000; margin-top: 4px; letter-spacing: 1px; font-weight: 800; text-transform: uppercase;">${d.company}</div>`)}
                             </td>
                             <td style="padding-left: 25px; vertical-align: bottom;">
                                 <div style="font-size: 11px; line-height: 1.7; color: #444;">
@@ -394,7 +400,8 @@
                         <tr>
                             <td>
                                 ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #64748b; margin: 4px 0 12px 0; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">${d.role}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #64748b; margin: 4px 0 2px 0;">${d.role}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 11px; font-weight: 900; color: #000; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">${d.company}</div>`)}
                                 <div style="font-size: 11px; line-height: 1.8; color: #333;">
                                     ${cond(d.email, `<strong>MAIL_</strong> ${d.email}<br>`)}
                                     ${cond(d.web, `<strong>WEB_S_</strong> ${d.web}<br>`)}
@@ -408,7 +415,8 @@
                 axis: `
                     <div id="sig-export" style="font-family: Arial, sans-serif; text-align: center; width: 100%; max-width: 500px; margin: 0 auto;">
                         ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: 12px; text-transform: uppercase;">${d.name}</div>`)}
-                        ${cond(d.role, `<div style="font-size: 10px; color: #999; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">${d.role}</div>`)}
+                        ${cond(d.role, `<div style="font-size: 10px; color: #999; letter-spacing: 5px; text-transform: uppercase;">${d.role}</div>`)}
+                        ${cond(d.company, `<div style="font-size: 10px; color: #000; letter-spacing: 3px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">${d.company}</div>`)}
                         <div style="height: 1px; width: 100%; background: linear-gradient(to right, transparent, #000, transparent); margin-bottom: 20px;"></div>
                         <div style="font-size: 11px; color: #444;">
                             ${cond(d.email, `${d.email} &nbsp; &bull; &nbsp; `)}${cond(d.web, `${d.web} &nbsp; &bull; &nbsp; `)}${cond(d.phone, `${d.phone}`)}
@@ -421,7 +429,8 @@
                         <tr>
                             <td style="padding: 30px; width: 60%;">
                                 ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: 2px;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 10px; color: #666; font-weight: bold; margin-bottom: 20px;">${d.role}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 10px; color: #666; font-weight: bold;">${d.role}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 10px; color: #fff; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">${d.company}</div>`)}
                                 <div style="font-size: 11px; line-height: 1.6; color: #aaa;">
                                     ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
                                 </div>
@@ -432,7 +441,8 @@
                 `,
                 void: `
                     <div id="sig-export" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto; border: 1px solid #000; padding: 40px; text-align: center;">
-                        ${cond(d.name, `<div style="font-size: 36px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; margin-bottom: 15px;">${d.name}</div>`)}
+                        ${cond(d.name, `<div style="font-size: 36px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; margin-bottom: 5px;">${d.name}</div>`)}
+                        ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">${d.company}</div>`)}
                         <div style="font-size: 11px; color: #000; font-weight: bold; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 8px 0; margin-bottom: 20px; letter-spacing: 4px;">${d.role}</div>
                         <div style="font-size: 12px; color: #666;">
                             ${cond(d.email, `E: ${d.email} &nbsp; / &nbsp; `)}${cond(d.web, `W: ${d.web}`)}<br>${cond(d.phone, `PH: ${d.phone}`)}
@@ -444,7 +454,7 @@
                 // SCHEMATICS THEME
                 blueprint: `
                     <div id="sig-export" style="background-color: #1d4ed8; color: #ffffff; font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px;">
-                        <div style="font-size: 9px; opacity: 0.6; margin-bottom: 10px;">SHEET_REF: ${Math.floor(Math.random()*900)+100} / FINAL_BUILD</div>
+                        <div style="font-size: 9px; opacity: 0.6; margin-bottom: 10px;">${d.company ? d.company.toUpperCase() : 'VSPH'} / SHEET_REF: ${Math.floor(Math.random()*900)+100} / FINAL_BUILD</div>
                         ${cond(d.name, `<div style="font-size: 22px; font-weight: bold; border-bottom: 1px solid #93c5fd; padding-bottom: 8px; margin-bottom: 15px; letter-spacing: 2px;">${d.name}</div>`)}
                         <table cellpadding="0" cellspacing="0" style="width: 100%; font-size: 11px;">
                             <tr>
@@ -468,6 +478,7 @@
                                 ${cond(d.img, `<td style="width: 90px; padding-right: 25px;"><img src="${d.img}" width="90" style="filter: grayscale(1); border: 1px solid #000; display: block; object-fit: cover;"></td>`)}
                                 <td>
                                     ${cond(d.name, `<div style="font-size: 26px; font-style: italic; margin-bottom: 4px;">${d.name}</div>`)}
+                                    ${cond(d.company, `<div style="font-family: Arial; font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">${d.company}</div>`)}
                                     ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px;">${d.role}</div>`)}
                                     <div style="font-family: 'Courier New', Courier; font-size: 11px; border-top: 1px dashed #eee; padding-top: 10px;">
                                         ${cond(d.email, `EMAIL: <strong>${d.email}</strong><br>`)}
@@ -483,7 +494,7 @@
                     <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; border: 1px solid #000; width: 100%; max-width: 500px; margin: 0 auto;">
                         <tr>
                             <td style="background: #fafafa; border-bottom: 1px solid #000; padding: 15px 25px;">
-                                <div style="font-size: 10px; color: #999; letter-spacing: 2px;">PROJECT_LEGEND</div>
+                                <div style="font-size: 10px; color: #999; letter-spacing: 2px;">PROJECT_LEGEND // ${d.company ? d.company.toUpperCase() : 'VSPH'}</div>
                                 ${cond(d.name, `<div style="font-size: 20px; font-weight: bold; letter-spacing: 3px;">${d.name}</div>`)}
                             </td>
                             ${cond(d.img, `<td rowspan="2" style="border-left: 1px solid #000; width: 100px; text-align: center;"><img src="${d.img}" width="100" style="filter: grayscale(1); display: block; object-fit: cover;"></td>`)}
@@ -503,7 +514,8 @@
                         <tr>
                             <td style="width: 15px; background: #000;"></td>
                             <td style="padding: 0 40px; vertical-align: top;">
-                                ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: -1px; line-height: 0.9; margin-bottom: 15px;">${d.name}</div>`)}
+                                ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: -1px; line-height: 0.9; margin-bottom: 10px;">${d.name}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">${d.company}</div>`)}
                                 ${cond(d.role, `<div style="font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">${d.role}</div>`)}
                                 <div style="font-size: 12px; line-height: 1.8; color: #444;">
                                     ${cond(d.email, `<strong>EMAIL:</strong> ${d.email}<br>`)}
@@ -519,8 +531,8 @@
                     <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; border: 1px solid #eee; padding: 25px; width: 100%; max-width: 500px; margin: 0 auto; background: #fafafa;">
                         <table cellpadding="0" cellspacing="0" style="width: 100%;">
                             <tr>
-                                <td style="padding-bottom: 10px; border-bottom: 1px solid #000; font-weight: bold;">[ SYSTEM_STATUS: ONLINE ]</td>
-                                <td style="text-align: right; border-bottom: 1px solid #000;">V.029</td>
+                                <td style="padding-bottom: 10px; border-bottom: 1px solid #000; font-weight: bold;">[ ${d.company ? d.company.toUpperCase() : 'VSPH'} // ONLINE ]</td>
+                                <td style="text-align: right; border-bottom: 1px solid #000;">V.030</td>
                             </tr>
                         </table>
                         <div style="padding-top: 20px;">
@@ -539,6 +551,7 @@
                         ${cond(d.img, `<img src="${d.img}" width="120" style="position: absolute; top: -20px; right: -10px; border: 4px solid #fff; filter: grayscale(1); z-index: 5; object-fit: cover;">`)}
                         <div style="color: #fff;">
                             ${cond(d.name, `<div style="font-size: 42px; font-weight: 900; line-height: 0.8; letter-spacing: -2px; margin-bottom: 5px;">${d.name}</div>`)}
+                            ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #fff; text-transform: uppercase; margin-bottom: 4px;">${d.company}</div>`)}
                             ${cond(d.role, `<div style="font-size: 12px; font-weight: 300; opacity: 0.5; margin-bottom: 30px;">${d.role}</div>`)}
                             <div style="height: 10px; width: 60px; background: #fff; margin-bottom: 30px;"></div>
                             <div style="font-size: 11px; color: #fff; line-height: 1.5;">
@@ -554,10 +567,11 @@
                         <tr>
                             <td style="background-color: #000; color: #fff; padding: 20px; width: 50%;">
                                 ${cond(d.name, `<div style="font-size: 40px; text-transform: uppercase; line-height: 0.9; word-break: break-all;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; font-weight: bold; margin-top: 15px; letter-spacing: 3px;">${d.role}</div>`)}
+                                ${cond(d.company, `<div style="font-family: Arial; font-size: 12px; font-weight: 900; margin-top: 10px; color: #fff; letter-spacing: 2px;">${d.company}</div>`)}
+                                ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; font-weight: bold; margin-top: 5px; letter-spacing: 3px; opacity: 0.7;">${d.role}</div>`)}
                             </td>
                             <td style="background-color: #fff; padding: 20px; vertical-align: top;">
-                                ${cond(d.img, `<img src="${d.img}" width="80" height="80" style="filter: grayscale(1); margin-bottom: 15px; display: block;">`)}
+                                ${cond(d.img, `<img src="${d.img}" width="80" height="80" style="filter: grayscale(1); margin-bottom: 15px; display: block; object-fit: cover;">`)}
                                 <div style="font-family: Arial, sans-serif; font-size: 11px; line-height: 1.6; color: #000;">
                                     ${cond(d.email, `E: ${d.email}<br>`)}
                                     ${cond(d.web, `W: ${d.web}<br>`)}
@@ -573,9 +587,10 @@
                             <tr>
                                 <td style="vertical-align: top; transform: skewX(-5deg);">
                                     ${cond(d.name, `<div style="font-size: 34px; font-weight: 900; font-style: italic; line-height: 1; color: #000; border-bottom: 8px solid #000; display: inline-block;">${d.name}</div>`)}
-                                    ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #999; margin-top: 10px; letter-spacing: 5px;">${d.role}</div>`)}
+                                    ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-top: 10px; letter-spacing: 2px;">${d.company}</div>`)}
+                                    ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; color: #999; margin-top: 2px; letter-spacing: 5px;">${d.role}</div>`)}
                                 </td>
-                                ${cond(d.img, `<td style="text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); transform: rotate(5deg);"></td>`)}
+                                ${cond(d.img, `<td style="text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); transform: rotate(5deg); object-fit: cover;"></td>`)}
                             </tr>
                         </table>
                         <div style="margin-top: 30px; font-size: 11px; text-align: right; font-weight: bold;">
@@ -587,8 +602,9 @@
                     <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background: #000; color: #fff; width: 100%; max-width: 500px; margin: 0 auto; border-radius: 40px; overflow: hidden;">
                         <tr>
                             <td style="padding: 40px; text-align: center;">
-                                ${cond(d.img, `<img src="${d.img}" width="100" height="100" style="border-radius: 50%; border: 4px solid #fff; filter: grayscale(1); margin-bottom: 20px;">`)}
+                                ${cond(d.img, `<img src="${d.img}" width="100" height="100" style="border-radius: 50%; border: 4px solid #fff; filter: grayscale(1); margin-bottom: 20px; object-fit: cover;">`)}
                                 ${cond(d.name, `<div style="font-size: 28px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase;">${d.name}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 3px; margin-top: 4px;">${d.company}</div>`)}
                                 ${cond(d.role, `<div style="font-size: 10px; opacity: 0.5; margin-bottom: 25px; letter-spacing: 8px;">${d.role}</div>`)}
                                 <div style="font-size: 11px; line-height: 2; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px;">
                                     ${cond(d.email, `${d.email} &bull; `)}${cond(d.web, `${d.web} &bull; `)}${cond(d.phone, `${d.phone}`)}
@@ -599,7 +615,7 @@
                 `,
                 glitch: `
                     <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; border: 2px solid #000; padding: 25px;">
-                        <div style="background: #000; color: #fff; padding: 5px 10px; display: inline-block; font-size: 10px; margin-bottom: 20px;">ERROR_CODE_27</div>
+                        <div style="background: #000; color: #fff; padding: 5px 10px; display: inline-block; font-size: 10px; margin-bottom: 20px;">SYSTEM_METADATA // ${d.company ? d.company.toUpperCase() : 'VSPH'}</div>
                         <table cellpadding="0" cellspacing="0" style="width: 100%;">
                             <tr>
                                 <td>
@@ -611,7 +627,7 @@
                                         ${cond(d.phone, `>> PHN: ${d.phone}`)}
                                     </div>
                                 </td>
-                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" style="filter: grayscale(1) invert(1) contrast(2);"></td>`)}
+                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" style="filter: grayscale(1) invert(1) contrast(2); object-fit: cover;"></td>`)}
                             </tr>
                         </table>
                     </div>
@@ -624,14 +640,15 @@
                             <td style="width: 25px; background: #000; padding: 0;"></td>
                             <td style="padding: 20px 35px; border-bottom: 25px solid #000;">
                                 ${cond(d.name, `<div style="font-size: 38px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; text-transform: uppercase; color: #000;">${d.name}</div>`)}
-                                ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; letter-spacing: 5px; margin-top: 15px; color: #666;">${d.role}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-top: 10px; text-transform: uppercase;">${d.company}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; letter-spacing: 5px; margin-top: 2px; color: #666;">${d.role}</div>`)}
                                 <div style="margin-top: 35px; font-size: 11px; line-height: 1.8; color: #000; font-weight: bold;">
                                     ${cond(d.email, `EML: ${d.email}<br>`)}
                                     ${cond(d.web, `URL: ${d.web}<br>`)}
                                     ${cond(d.phone, `PHN: ${d.phone}`)}
                                 </div>
                             </td>
-                            ${cond(d.img, `<td style="vertical-align: top; text-align: right; padding-top: 20px;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.5);"></td>`)}
+                            ${cond(d.img, `<td style="vertical-align: top; text-align: right; padding-top: 20px;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.5); object-fit: cover;"></td>`)}
                         </tr>
                     </table>
                 `,
@@ -641,6 +658,7 @@
                         <table cellpadding="0" cellspacing="0" style="width: 100%;">
                             <tr>
                                 <td>
+                                    ${cond(d.company, `<div style="font-size: 14px; font-weight: 900; color: #000; margin-bottom: 4px;">${d.company}</div>`)}
                                     ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; background: #000; color: #fff; padding: 4px 10px; display: inline-block; margin-bottom: 25px;">${d.role}</div>`)}
                                     <div style="font-size: 12px; font-weight: 900; line-height: 1.8;">
                                         ${cond(d.email, `>> ${d.email}<br>`)}
@@ -648,7 +666,7 @@
                                         ${cond(d.phone, `>> ${d.phone}`)}
                                     </div>
                                 </td>
-                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); border: 4px solid #000;"></td>`)}
+                                ${cond(d.img, `<td style="vertical-align: top; text-align: right;"><img src="${d.img}" width="80" height="80" style="filter: grayscale(1); border: 4px solid #000; object-fit: cover;"></td>`)}
                             </tr>
                         </table>
                     </div>
@@ -657,7 +675,7 @@
                     <div id="sig-export" style="font-family: Arial, sans-serif; border: 1px solid #ddd; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px; background: #fdfdfd;">
                         <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
                             <tr>
-                                <td style="font-size: 10px; color: #999; font-weight: bold;">SITE_REF: ${Math.floor(Math.random()*9000)+1000}</td>
+                                <td style="font-size: 10px; color: #999; font-weight: bold;">SITE_REF: ${Math.floor(Math.random()*9000)+1000} // ${d.company ? d.company.toUpperCase() : 'VSPH'}</td>
                                 <td style="text-align: right; font-size: 10px; color: #999; font-weight: bold;">ARCHIVED: ${new Date().toLocaleDateString()}</td>
                             </tr>
                         </table>
@@ -670,7 +688,7 @@
                                     ${cond(d.web, `<strong>PORTFOLIO:</strong> ${d.web}<br>`)}
                                     ${cond(d.phone, `<strong>DIAL:</strong> ${d.phone}`)}
                                 </td>
-                                ${cond(d.img, `<td style="vertical-align: middle; text-align: right;"><img src="${d.img}" width="60" height="60" style="filter: grayscale(1); border-radius: 50%;"></td>`)}
+                                ${cond(d.img, `<td style="vertical-align: middle; text-align: right;"><img src="${d.img}" width="60" height="60" style="filter: grayscale(1); border-radius: 50%; object-fit: cover;"></td>`)}
                             </tr>
                         </table>
                     </div>
@@ -680,6 +698,7 @@
                         <tr>
                             <td style="padding: 40px; border-right: 15px solid #000;">
                                 ${cond(d.name, `<div style="font-size: 32px; font-weight: 900; color: #000; letter-spacing: -1px; margin-bottom: 2px;">${d.name}</div>`)}
+                                ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; margin-bottom: 2px;">${d.company}</div>`)}
                                 ${cond(d.role, `<div style="font-size: 11px; color: #888; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; margin-bottom: 25px;">${d.role}</div>`)}
                                 <div style="font-size: 12px; line-height: 1.8; color: #444;">
                                     ${cond(d.email, `E: <strong>${d.email}</strong><br>`)}
@@ -687,7 +706,7 @@
                                     ${cond(d.phone, `P: <strong>${d.phone}</strong>`)}
                                 </div>
                             </td>
-                            ${cond(d.img, `<td style="width: 150px; padding: 0; background: #000; vertical-align: middle; text-align: center;"><img src="${d.img}" width="150" style="display: block; filter: grayscale(1) contrast(1.1); opacity: 0.8;"></td>`)}
+                            ${cond(d.img, `<td style="width: 150px; padding: 0; background: #000; vertical-align: middle; text-align: center;"><img src="${d.img}" width="150" style="display: block; filter: grayscale(1) contrast(1.1); opacity: 0.8; object-fit: cover;"></td>`)}
                         </tr>
                     </table>
                 `,
@@ -698,6 +717,7 @@
                                 <tr>
                                     <td style="vertical-align: top;">
                                         ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #000; margin-bottom: 5px;">${d.name}</div>`)}
+                                        ${cond(d.company, `<div style="font-size: 12px; font-weight: 900; color: #000; text-transform: uppercase; margin-bottom: 2px;">${d.company}</div>`)}
                                         ${cond(d.role, `<div style="font-size: 11px; font-weight: bold; color: #999; margin-bottom: 25px;">${d.role}</div>`)}
                                         <div style="font-size: 11px; line-height: 1.8; color: #000;">
                                             ${cond(d.email, `<strong>[EMAIL]</strong> ${d.email}<br>`)}
