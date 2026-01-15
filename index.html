@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSPH | Signature Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap');
+        
+        :root {
+            --studio-bg: #f8f9fa;
+            --sidebar-bg: #ffffff;
+            --accent: #000000;
+            --border: #e5e7eb;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: var(--studio-bg);
+            color: #1a1a1a;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+
+        .sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
+
+        /* Sophisticated Input Styling */
+        .input-wrapper label {
+            display: block;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .custom-input {
+            width: 100%;
+            background: #f1f5f9;
+            border: 1px solid transparent;
+            padding: 12px 16px;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+        }
+
+        .custom-input:focus {
+            background: #ffffff;
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* Bold Tactile Design Selection Buttons */
+        .design-index-btn {
+            @apply flex flex-col items-center justify-center py-4 px-2 border border-black transition-all duration-200 cursor-pointer rounded-sm;
+            flex: 1;
+            margin: 0 4px;
+        }
+
+        .design-index-btn .index-label {
+            @apply text-[9px] font-bold uppercase tracking-[2px];
+        }
+
+        /* Active State: Matches Copy Button */
+        .design-index-btn.active {
+            @apply bg-black text-white shadow-lg;
+        }
+
+        /* Inactive State */
+        .design-index-btn:not(.active) {
+            @apply bg-white text-black;
+        }
+
+        /* Hover State */
+        .design-index-btn:not(.active):hover {
+            @apply bg-slate-50 border-slate-400 -translate-y-0.5 shadow-md;
+        }
+
+        /* Toast Styling */
+        .copy-toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #111;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 20px 40px -5px rgba(0,0,0,0.3);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Grid Background for Preview */
+        .drafting-table {
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <div class="flex h-screen w-full">
+        
+        <!-- Sidebar: The Design Studio -->
+        <aside class="w-full lg:w-[380px] bg-white border-r border-slate-200 flex flex-col h-screen z-20 shadow-xl">
+            <div class="p-10 border-b border-slate-100">
+                <div class="flex items-center space-x-3">
+                    <h1 class="text-4xl font-black tracking-tighter uppercase serif">VSPH</h1>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-10 sidebar space-y-12">
+                <!-- Identity Group -->
+                <section class="space-y-6">
+                    <h2 class="text-[10px] font-black uppercase tracking-[3px] text-black opacity-30">Identity Metadata</h2>
+                    <div class="input-wrapper">
+                        <label>Full Name</label>
+                        <input type="text" id="in-name" class="custom-input" value="MARCUS THORNE" oninput="liveUpdate()">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Job Title</label>
+                        <input type="text" id="in-role" class="custom-input" value="PRINCIPAL ARCHITECT" oninput="liveUpdate()">
+                    </div>
+                </section>
+
+                <!-- Connectivity Group -->
+                <section class="space-y-6">
+                    <h2 class="text-[10px] font-black uppercase tracking-[3px] text-black opacity-30">Connectivity Points</h2>
+                    <div class="input-wrapper">
+                        <label>Email Address</label>
+                        <input type="text" id="in-email" class="custom-input" value="m.thorne@systems.io" oninput="liveUpdate()">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Website URL</label>
+                        <input type="text" id="in-web" class="custom-input" value="systems.io" oninput="liveUpdate()">
+                    </div>
+                    <div class="input-wrapper">
+                        <label>Direct Phone</label>
+                        <input type="text" id="in-phone" class="custom-input" value="+1 415 555 0122" oninput="liveUpdate()">
+                    </div>
+                </section>
+
+                <!-- Media Group -->
+                <section class="space-y-6 pb-10">
+                    <h2 class="text-[10px] font-black uppercase tracking-[3px] text-black opacity-30">Visual Assets</h2>
+                    <div class="input-wrapper">
+                        <label>Portrait URL</label>
+                        <input type="text" id="in-img" class="custom-input" value="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&h=200&auto=format&fit=crop" oninput="liveUpdate()">
+                    </div>
+                </section>
+            </div>
+
+            <!-- Global Action -->
+            <div class="p-10 border-t border-slate-100 bg-white">
+                <button onclick="copySignature()" class="w-full bg-black text-white py-5 rounded-sm font-bold text-[10px] uppercase tracking-[4px] hover:bg-slate-800 transition-all shadow-xl active:scale-95">
+                    Copy Signature
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 flex flex-col h-screen relative">
+            <!-- Top Navigation -->
+            <nav class="bg-white border-b border-slate-200 flex h-24 px-12 items-center justify-between sticky top-0 z-10">
+                <div class="flex space-x-12 h-full">
+                    <button id="tab-foundations" onclick="switchTheme('foundations')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-black transition-all">Foundations</button>
+                    <button id="tab-schematics" onclick="switchTheme('schematics')" class="text-[10px] font-black uppercase tracking-widest h-full border-b-2 border-transparent text-slate-300 hover:text-black transition-all">Schematics</button>
+                </div>
+                <div class="text-[9px] text-slate-300 font-bold uppercase tracking-[4px]">VSPH_CORE_RENDER_V.27</div>
+            </nav>
+
+            <div class="flex-1 drafting-table p-8 lg:p-12 overflow-y-auto">
+                <div class="max-w-5xl mx-auto flex flex-col items-center">
+                    
+                    <!-- Design Selection Index -->
+                    <div class="w-full mb-16">
+                        <div id="options-foundations" class="flex justify-between w-full">
+                            <button onclick="changeTemplate('perspective')" id="btn-perspective" class="design-index-btn active">
+                                <span class="index-label">Perspective</span>
+                            </button>
+                            <button onclick="changeTemplate('elevation')" id="btn-elevation" class="design-index-btn">
+                                <span class="index-label">Elevation</span>
+                            </button>
+                            <button onclick="changeTemplate('axis')" id="btn-axis" class="design-index-btn">
+                                <span class="index-label">Axis</span>
+                            </button>
+                            <button onclick="changeTemplate('monolith')" id="btn-monolith" class="design-index-btn">
+                                <span class="index-label">Monolith</span>
+                            </button>
+                            <button onclick="changeTemplate('void')" id="btn-void" class="design-index-btn">
+                                <span class="index-label">Void</span>
+                            </button>
+                        </div>
+
+                        <div id="options-schematics" class="flex justify-between w-full hidden">
+                            <button onclick="changeTemplate('blueprint')" id="btn-blueprint" class="design-index-btn">
+                                <span class="index-label">Blueprint</span>
+                            </button>
+                            <button onclick="changeTemplate('marker')" id="btn-marker" class="design-index-btn">
+                                <span class="index-label">Site Marker</span>
+                            </button>
+                            <button onclick="changeTemplate('legend')" id="btn-legend" class="design-index-btn">
+                                <span class="index-label">Legend</span>
+                            </button>
+                            <button onclick="changeTemplate('section_aa')" id="btn-section_aa" class="design-index-btn">
+                                <span class="index-label">Section AA</span>
+                            </button>
+                            <button onclick="changeTemplate('matrix')" id="btn-matrix" class="design-index-btn">
+                                <span class="index-label">Matrix</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Signature Stage -->
+                    <div class="relative w-full">
+                        <div class="bg-white p-12 lg:p-24 shadow-[0_60px_100px_-20px_rgba(0,0,0,0.08)] border border-slate-100 flex items-center justify-center min-h-[420px] rounded-sm relative">
+                            <!-- Crop Marks -->
+                            <div class="absolute top-6 left-6 w-4 h-[1px] bg-slate-200"></div>
+                            <div class="absolute top-6 left-6 w-[1px] h-4 bg-slate-200"></div>
+                            <div class="absolute top-6 right-6 w-4 h-[1px] bg-slate-200"></div>
+                            <div class="absolute top-6 right-6 w-[1px] h-4 bg-slate-200"></div>
+                            <div class="absolute bottom-6 left-6 w-4 h-[1px] bg-slate-200"></div>
+                            <div class="absolute bottom-6 left-6 w-[1px] h-4 bg-slate-200"></div>
+                            <div class="absolute bottom-6 right-6 w-4 h-[1px] bg-slate-200"></div>
+                            <div class="absolute bottom-6 right-6 w-[1px] h-4 bg-slate-200"></div>
+
+                            <div id="render-target" class="w-full">
+                                <!-- Signature Rendered Here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Specs -->
+                    <div class="w-full flex justify-between items-center text-[9px] text-slate-300 font-bold uppercase tracking-[4px] pt-10">
+                        <div class="flex space-x-10">
+                            <span>ALIGN_MODE: SNAP</span>
+                            <span>RENDER_TYPE: STATIC_TABLE</span>
+                        </div>
+                        <div>VSPH // SYSTEM_OUTPUT</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="copy-toast" class="copy-toast">Signature Copied</div>
+
+    <script>
+        let currentTemplate = 'perspective';
+        let currentTheme = 'foundations';
+
+        function switchTheme(theme) {
+            currentTheme = theme;
+            
+            const tabs = ['foundations', 'schematics'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                const isActive = t === theme;
+                el.className = `text-[10px] font-black uppercase tracking-widest h-full border-b-2 transition-all ${isActive ? 'border-black text-black' : 'border-transparent text-slate-300 hover:text-black'}`;
+                
+                document.getElementById(`options-${t}`).classList.toggle('hidden', !isActive);
+            });
+
+            const firstTemplate = theme === 'foundations' ? 'perspective' : 'blueprint';
+            changeTemplate(firstTemplate);
+        }
+
+        function liveUpdate() {
+            const data = {
+                name: document.getElementById('in-name').value,
+                role: document.getElementById('in-role').value,
+                email: document.getElementById('in-email').value,
+                web: document.getElementById('in-web').value,
+                phone: document.getElementById('in-phone').value,
+                img: document.getElementById('in-img').value
+            };
+
+            const target = document.getElementById('render-target');
+            target.innerHTML = generateSignature(currentTemplate, data);
+        }
+
+        function generateSignature(type, d) {
+            const cond = (val, html) => val.trim() !== '' ? html : '';
+
+            const styles = {
+                // FOUNDATIONS THEME
+                perspective: `
+                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto;">
+                        <tr>
+                            ${cond(d.img, `
+                            <td style="padding-right: 25px; vertical-align: top;">
+                                <img src="${d.img}" width="70" height="70" style="display: block; filter: grayscale(1); border-radius: 2px; border: 1px solid #eee;">
+                            </td>
+                            `)}
+                            <td style="padding: 10px 25px 10px 0; border-right: 1px solid #eee; vertical-align: top;">
+                                ${cond(d.name, `<div style="font-size: 26px; font-weight: 900; letter-spacing: -1.5px; line-height: 0.9; text-transform: uppercase;">${d.name}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 10px; color: #999; margin-top: 8px; letter-spacing: 2px; font-weight: bold; text-transform: uppercase;">${d.role}</div>`)}
+                            </td>
+                            <td style="padding-left: 25px; vertical-align: bottom;">
+                                <div style="font-size: 11px; line-height: 1.7; color: #444;">
+                                    ${cond(d.email, `<span style="color:#000; font-weight:bold;">E:</span> ${d.email}<br>`)}
+                                    ${cond(d.web, `<span style="color:#000; font-weight:bold;">W:</span> ${d.web}<br>`)}
+                                    ${cond(d.phone, `<span style="color:#000; font-weight:bold;">P:</span> ${d.phone}`)}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                `,
+                elevation: `
+                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto; border-left: 8px solid #000; padding-left: 25px;">
+                        <tr>
+                            <td>
+                                ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: -1px; line-height: 1;">${d.name}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 12px; font-weight: bold; color: #64748b; margin: 4px 0 12px 0; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">${d.role}</div>`)}
+                                <div style="font-size: 11px; line-height: 1.8; color: #333;">
+                                    ${cond(d.email, `<strong>MAIL_</strong> ${d.email}<br>`)}
+                                    ${cond(d.web, `<strong>WEB_S_</strong> ${d.web}<br>`)}
+                                    ${cond(d.phone, `<strong>PH_NE_</strong> ${d.phone}`)}
+                                </div>
+                            </td>
+                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="110" style="display: block; filter: grayscale(1);"></td>`)}
+                        </tr>
+                    </table>
+                `,
+                axis: `
+                    <div id="sig-export" style="font-family: Arial, sans-serif; text-align: center; width: 100%; max-width: 500px; margin: 0 auto;">
+                        ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: 12px; text-transform: uppercase;">${d.name}</div>`)}
+                        ${cond(d.role, `<div style="font-size: 10px; color: #999; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px;">${d.role}</div>`)}
+                        <div style="height: 1px; width: 100%; background: linear-gradient(to right, transparent, #000, transparent); margin-bottom: 20px;"></div>
+                        <div style="font-size: 11px; color: #444;">
+                            ${cond(d.email, `${d.email} &nbsp; &bull; &nbsp; `)}${cond(d.web, `${d.web} &nbsp; &bull; &nbsp; `)}${cond(d.phone, `${d.phone}`)}
+                        </div>
+                    </div>
+                `,
+                monolith: `
+                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background: #000; color: #fff; width: 100%; max-width: 500px; margin: 0 auto;">
+                        <tr>
+                            <td style="padding: 30px; width: 60%;">
+                                ${cond(d.name, `<div style="font-size: 24px; font-weight: 900; letter-spacing: 2px;">${d.name}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 10px; color: #666; font-weight: bold; margin-bottom: 20px;">${d.role}</div>`)}
+                                <div style="font-size: 11px; line-height: 1.6; color: #aaa;">
+                                    ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
+                                </div>
+                            </td>
+                            ${cond(d.img, `<td style="padding: 0; vertical-align: top;"><img src="${d.img}" width="160" height="160" style="display: block; filter: grayscale(1) contrast(1.2);"></td>`)}
+                        </tr>
+                    </table>
+                `,
+                void: `
+                    <div id="sig-export" style="font-family: Arial, sans-serif; color: #000; width: 100%; max-width: 500px; margin: 0 auto; border: 1px solid #000; padding: 40px; text-align: center;">
+                        ${cond(d.name, `<div style="font-size: 36px; font-weight: 900; letter-spacing: -2px; line-height: 0.8; margin-bottom: 15px;">${d.name}</div>`)}
+                        <div style="font-size: 11px; color: #000; font-weight: bold; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 8px 0; margin-bottom: 20px; letter-spacing: 4px;">${d.role}</div>
+                        <div style="font-size: 12px; color: #666;">
+                            ${cond(d.email, `E: ${d.email} &nbsp; / &nbsp; `)}${cond(d.web, `W: ${d.web}`)}<br>${cond(d.phone, `PH: ${d.phone}`)}
+                        </div>
+                    </div>
+                `,
+
+                // SCHEMATICS THEME
+                blueprint: `
+                    <div id="sig-export" style="background-color: #1d4ed8; color: #ffffff; font-family: 'Courier New', Courier, monospace; width: 100%; max-width: 500px; margin: 0 auto; padding: 30px;">
+                        <div style="font-size: 9px; opacity: 0.6; margin-bottom: 10px;">SHEET_REF: ${Math.floor(Math.random()*900)+100} / FINAL_BUILD</div>
+                        ${cond(d.name, `<div style="font-size: 22px; font-weight: bold; border-bottom: 1px solid #93c5fd; padding-bottom: 8px; margin-bottom: 15px; letter-spacing: 2px;">${d.name}</div>`)}
+                        <table cellpadding="0" cellspacing="0" style="width: 100%; font-size: 11px;">
+                            <tr>
+                                <td style="line-height: 1.8;">
+                                    ${cond(d.role, `[ROLE]: ${d.role}<br>`)}
+                                    ${cond(d.email, `[EML ]: ${d.email}<br>`)}
+                                    ${cond(d.web, `[suspicious link removed]: ${d.web}<br>`)}
+                                    ${cond(d.phone, `[TEL ]: ${d.phone}`)}
+                                </td>
+                                ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="80" height="80" style="border: 1px solid #fff; filter: grayscale(1) brightness(1.2) contrast(1.2); mix-blend-mode: overlay;"></td>`)}
+                            </tr>
+                        </table>
+                    </div>
+                `,
+                marker: `
+                    <div id="sig-export" style="font-family: Georgia, serif; position: relative; padding: 30px; border: 1px solid #f1f5f9; width: 100%; max-width: 500px; margin: 0 auto;">
+                        <div style="position: absolute; top: -5px; left: -5px; width: 30px; height: 1px; background: #000;"></div>
+                        <div style="position: absolute; top: -10px; left: 5px; width: 1px; height: 30px; background: #000;"></div>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tr>
+                                ${cond(d.img, `<td style="width: 90px; padding-right: 25px;"><img src="${d.img}" width="90" style="filter: grayscale(1); border: 1px solid #000; display: block;"></td>`)}
+                                <td>
+                                    ${cond(d.name, `<div style="font-size: 26px; font-style: italic; margin-bottom: 4px;">${d.name}</div>`)}
+                                    ${cond(d.role, `<div style="font-family: Arial; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px;">${d.role}</div>`)}
+                                    <div style="font-family: 'Courier New', Courier; font-size: 11px; border-top: 1px dashed #eee; padding-top: 10px;">
+                                        ${cond(d.email, `EMAIL: <strong>${d.email}</strong><br>`)}
+                                        ${cond(d.web, `WEB_S: <strong>${d.web}</strong><br>`)}
+                                        ${cond(d.phone, `PHONE: <strong>${d.phone}</strong>`)}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                `,
+                legend: `
+                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; border: 1px solid #000; width: 100%; max-width: 500px; margin: 0 auto;">
+                        <tr>
+                            <td style="background: #fafafa; border-bottom: 1px solid #000; padding: 15px 25px;">
+                                <div style="font-size: 10px; color: #999; letter-spacing: 2px;">PROJECT_LEGEND</div>
+                                ${cond(d.name, `<div style="font-size: 20px; font-weight: bold; letter-spacing: 3px;">${d.name}</div>`)}
+                            </td>
+                            ${cond(d.img, `<td rowspan="2" style="border-left: 1px solid #000; width: 100px; text-align: center;"><img src="${d.img}" width="100" style="filter: grayscale(1); display: block;"></td>`)}
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px 25px; font-size: 11px; color: #444; line-height: 1.8;">
+                                ${cond(d.role, `<div style="font-weight: bold; border-bottom: 1px dashed #ddd; margin-bottom: 10px; padding-bottom: 5px;">${d.role}</div>`)}
+                                ${cond(d.email, `[E] ${d.email}<br>`)}
+                                ${cond(d.web, `[W] ${d.web}<br>`)}
+                                ${cond(d.phone, `[P] ${d.phone}`)}
+                            </td>
+                        </tr>
+                    </table>
+                `,
+                section_aa: `
+                    <table id="sig-export" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; width: 100%; max-width: 500px; margin: 0 auto;">
+                        <tr>
+                            <td style="width: 15px; background: #000;"></td>
+                            <td style="padding: 0 40px; vertical-align: top;">
+                                ${cond(d.name, `<div style="font-size: 32px; font-weight: 100; letter-spacing: -1px; line-height: 0.9; margin-bottom: 15px;">${d.name}</div>`)}
+                                ${cond(d.role, `<div style="font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">${d.role}</div>`)}
+                                <div style="font-size: 12px; line-height: 1.8; color: #444;">
+                                    ${cond(d.email, `<strong>EMAIL:</strong> ${d.email}<br>`)}
+                                    ${cond(d.web, `<strong>WEB_S:</strong> ${d.web}<br>`)}
+                                    ${cond(d.phone, `<strong>DIREC:</strong> ${d.phone}`)}
+                                </div>
+                            </td>
+                            ${cond(d.img, `<td style="vertical-align: bottom; text-align: right;"><img src="${d.img}" width="100" style="filter: grayscale(1) contrast(1.1);"></td>`)}
+                        </tr>
+                    </table>
+                `,
+                matrix: `
+                    <div id="sig-export" style="font-family: 'Courier New', Courier, monospace; border: 1px solid #eee; padding: 25px; width: 100%; max-width: 500px; margin: 0 auto; background: #fafafa;">
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tr>
+                                <td style="padding-bottom: 10px; border-bottom: 1px solid #000; font-weight: bold;">[ SYSTEM_STATUS: ONLINE ]</td>
+                                <td style="text-align: right; border-bottom: 1px solid #000;">V.027</td>
+                            </tr>
+                        </table>
+                        <div style="padding-top: 20px;">
+                            ${cond(d.name, `<div style="font-size: 18px; font-weight: bold; margin-bottom: 2px;">${d.name}</div>`)}
+                            ${cond(d.role, `<div style="font-size: 11px; color: #888; margin-bottom: 15px;">${d.role}</div>`)}
+                            <div style="font-size: 11px; color: #333; border-left: 2px solid #000; padding-left: 15px; line-height: 1.6;">
+                                ${cond(d.email, `EML: ${d.email}<br>`)}${cond(d.web, `WEB: ${d.web}<br>`)}${cond(d.phone, `TEL: ${d.phone}`)}
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+            return styles[type];
+        }
+
+        function changeTemplate(id) {
+            currentTemplate = id;
+            document.querySelectorAll('.design-index-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + id).classList.add('active');
+            liveUpdate();
+        }
+
+        function copySignature() {
+            const el = document.getElementById('sig-export');
+            const range = document.createRange();
+            range.selectNode(el);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        window.onload = liveUpdate;
+    </script>
+</body>
+</html>
