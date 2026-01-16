@@ -255,7 +255,7 @@
                 el.className = `text-[10px] font-black uppercase tracking-widest h-full border-b-2 transition-all ${isActive ? 'border-black text-black' : 'border-transparent text-slate-300 hover:text-black'}`;
                 document.getElementById(`options-${t}`).classList.toggle('hidden', !isActive);
             });
-            const first = theme === 'foundations' ? 'perspective' : (theme === 'schematics' ? 'sketch' : (theme === 'avantgarde' ? 'bauhaus' : 'concrete'));
+            const first = theme === 'foundations' ? 'perspective' : (theme === 'schematics' ? 'sketch' : (theme === 'avantgarde' ? 'bauhaus' : (theme === 'industrial' ? 'concrete' : 'perspective')));
             changeTemplate(first);
         }
 
@@ -324,7 +324,11 @@
         function generateSignature(type, d) {
             const cond = (val, html) => val && val.trim() !== '' ? html : '';
             
-            // GMAIL HARD-TABLE ARCHITECTURE
+            // THE GMAIL PROTOCOL:
+            // 1. Nested Tables for EVERY line of text.
+            // 2. Explicit width/height attributes.
+            // 3. No display:block on spans.
+            // 4. No CSS borders for design lines - use <td> with bgcolor.
             const wrap = (content) => {
                 const cleanContent = content.replace(/>\s+</g, '><').trim();
                 return `
@@ -332,7 +336,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" style="border-collapse:collapse; border-spacing:0; margin:0; padding:0; width:100%; text-align:left;" align="left">
                         <tr>
                             <td align="left" valign="top" style="padding:0; margin:0;">
-                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="480" style="border-collapse:collapse; border-spacing:0; margin:0; padding:0; width:480px; text-align:left;" align="left">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="500" style="border-collapse:collapse; border-spacing:0; margin:0; padding:0; width:500px; text-align:left;" align="left">
                                     <tr>
                                         <td align="left" valign="top" style="padding:0; margin:0; font-family:Arial, sans-serif; font-size:12px; color:#000000; line-height:1.2; mso-line-height-rule:exactly;">
                                             ${cleanContent}
@@ -353,13 +357,17 @@
                                 ${cond(d.img, `<img src="${d.img}" width="65" height="65" border="0" alt="portrait" style="display:block; border:1px solid #eeeeee;">`)}
                             </td>
                             <td width="20" style="width:20px;">&nbsp;</td>
-                            <td valign="top" align="left" style="padding:0; border-right:1px solid #eeeeee; font-family:Arial, sans-serif;">
+                            <td valign="top" align="left" style="padding:0; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:24px; font-weight:900; color:#000000; line-height:24px; text-transform:uppercase;">${d.name}</td></tr>
-                                    <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#999999; font-weight:bold; line-height:10px; text-transform:uppercase;">${d.role}</td></tr>
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#000000; font-weight:800; line-height:10px; text-transform:uppercase;">${d.company}</td></tr>
-                                    <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                    <tr><td align="left" style="padding-right:20px; border-right:1px solid #eeeeee; font-family:Arial, sans-serif;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:24px; font-weight:900; color:#000000; line-height:24px; text-transform:uppercase;">${d.name}</td></tr>
+                                            <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#999999; font-weight:bold; line-height:10px; text-transform:uppercase;">${d.role}</td></tr>
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#000000; font-weight:800; line-height:10px; text-transform:uppercase;">${d.company}</td></tr>
+                                            <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                        </table>
+                                    </td></tr>
                                 </table>
                             </td>
                             <td width="20" style="width:20px;">&nbsp;</td>
@@ -378,7 +386,7 @@
                 elevation: wrap(`
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left">
                         <tr>
-                            <td align="left" valign="top" width="5" style="background-color:#000000; width:5px; min-width:5px;">&nbsp;</td>
+                            <td align="left" valign="top" width="6" bgcolor="#000000" style="width:6px; min-width:6px; background-color:#000000;">&nbsp;</td>
                             <td width="20" style="width:20px;">&nbsp;</td>
                             <td align="left" valign="top" style="padding:0; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -413,7 +421,7 @@
                                     <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; font-weight:900; color:#000000; line-height:10px;">${d.company.toUpperCase()}</td></tr>
                                     <tr><td height="12" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td height="1" width="200" bgcolor="#000000" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                    <tr><td height="1" width="200" bgcolor="#000000" style="font-size:1px; line-height:1px; background-color:#000000;">&nbsp;</td></tr>
                                     <tr><td height="12" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#444444; line-height:16px;">
                                         ${cond(d.email, `${d.email} &bull; `)}${cond(d.web, `${d.web} &bull; `)}${cond(d.phone, `${d.phone}`)}
@@ -424,7 +432,7 @@
                     </table>
                 `),
                 monolith: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" style="background-color:#000000;">
                         <tr>
                             <td align="left" valign="top" style="padding:25px; width:180px; font-family:Arial, sans-serif; color:#ffffff;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -444,23 +452,27 @@
                     </table>
                 `),
                 void: wrap(`
-                    <table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" role="presentation" align="left" style="border-collapse:collapse;">
-                        <tr>
-                            <td align="left" valign="top" style="padding:25px; text-align:left; font-family:Arial, sans-serif; background-color:#ffffff;">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    ${cond(d.img, `<tr><td align="left" style="padding-bottom:15px;"><img src="${d.img}" width="50" height="50" border="1" bordercolor="#000000" style="display:block;"></td></tr>`)}
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:30px; font-weight:900; color:#000000; letter-spacing:-1px; line-height:30px;">${d.name}</td></tr>
-                                    <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:12px; font-weight:900; color:#000000; line-height:14px;">${d.company}</td></tr>
-                                    <tr><td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td height="1" bgcolor="#000000" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; padding:4px 0; color:#000000; letter-spacing:2px; text-transform:uppercase; font-weight:bold; line-height:16px;">${d.role}</td></tr>
-                                    <tr><td height="1" bgcolor="#000000" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td height="8" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#666666; line-height:16px;">${cond(d.email, `${d.email} &bull; `)}${cond(d.web, `${d.web}`)}</td></tr>
-                                </table>
-                            </td>
-                        </tr>
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" style="background-color:#000000;">
+                        <tr><td style="padding:1px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="background-color:#ffffff;">
+                                <tr>
+                                    <td align="left" valign="top" style="padding:25px; text-align:left; font-family:Arial, sans-serif;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            ${cond(d.img, `<tr><td align="left" style="padding-bottom:15px;"><img src="${d.img}" width="50" height="50" border="1" bordercolor="#000000" style="display:block;"></td></tr>`)}
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:30px; font-weight:900; color:#000000; letter-spacing:-1px; line-height:30px;">${d.name}</td></tr>
+                                            <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:12px; font-weight:900; color:#000000; line-height:14px;">${d.company}</td></tr>
+                                            <tr><td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td height="1" bgcolor="#000000" style="font-size:1px; line-height:1px; background-color:#000000;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; padding:4px 0; color:#000000; letter-spacing:2px; text-transform:uppercase; font-weight:bold; line-height:16px;">${d.role}</td></tr>
+                                            <tr><td height="1" bgcolor="#000000" style="font-size:1px; line-height:1px; background-color:#000000;">&nbsp;</td></tr>
+                                            <tr><td height="8" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#666666; line-height:16px;">${cond(d.email, `${d.email} &bull; `)}${cond(d.web, `${d.web}`)}</td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
                     </table>
                 `),
                 sketch: wrap(`
@@ -486,10 +498,10 @@
                 cad_block: wrap(`
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left">
                         <tr>
-                            <td align="left" valign="top" bgcolor="#f1f5f9" style="border:1px solid #000000; padding:20px; width:220px;">
+                            <td align="left" valign="top" bgcolor="#f1f5f9" style="border:1px solid #000000; padding:20px; width:220px; background-color:#f1f5f9;">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:9px; font-weight:bold; color:#000000; line-height:10px;">OBJECT_DATA // ${d.header}</td></tr>
-                                    <tr><td height="5" bgcolor="#000000" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                    <tr><td height="5" bgcolor="#000000" style="font-size:1px; line-height:1px; background-color:#000000;">&nbsp;</td></tr>
                                     <tr><td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:18px; font-weight:900; color:#000000; line-height:18px;">${d.name}</td></tr>
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#000000; line-height:14px;">${d.role} // ${d.company}</td></tr>
@@ -509,7 +521,7 @@
                 plotter: wrap(`
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left">
                         <tr>
-                            <td valign="top" align="center" bgcolor="#000000" style="padding:8px; width:25px;">
+                            <td valign="top" align="center" bgcolor="#000000" style="padding:8px; width:25px; background-color:#000000;">
                                 <table border="0" cellpadding="0" cellspacing="0"><tr><td align="center" style="font-family:Arial, sans-serif; font-size:8px; font-weight:900; color:#ffffff; line-height:10px; text-transform:uppercase;">${d.header}</td></tr></table>
                             </td>
                             <td align="left" valign="top" style="padding:15px 25px; border-top:1px solid #000000; border-bottom:1px solid #000000; font-family:Arial, sans-serif;">
@@ -538,7 +550,7 @@
                                 ${cond(d.img, `<img src="${d.img}" width="60" height="60" border="1" bordercolor="#000000" style="display:block;">`)}
                             </td>
                             <td width="20" style="width:20px;">&nbsp;</td>
-                            <td align="left" valign="top" width="1" bgcolor="#000000" style="width:1px; min-width:1px;">&nbsp;</td>
+                            <td align="left" valign="top" width="1" bgcolor="#000000" style="width:1px; min-width:1px; background-color:#000000;">&nbsp;</td>
                             <td width="15" style="width:15px;">&nbsp;</td>
                             <td align="left" valign="top" style="font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -555,7 +567,7 @@
                     </table>
                 `),
                 coordinate: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#fafafa" style="border:1px solid #eeeeee;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#fafafa" style="border:1px solid #eeeeee; background-color:#fafafa;">
                         <tr>
                             <td align="left" valign="top" style="padding:20px; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -591,7 +603,7 @@
                 bauhaus: wrap(`
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left">
                         <tr>
-                            <td align="left" valign="top" width="8" bgcolor="#e11d48" style="width:8px; height:120px;">&nbsp;</td>
+                            <td align="left" valign="top" width="8" bgcolor="#e11d48" style="width:8px; height:120px; background-color:#e11d48;">&nbsp;</td>
                             <td align="left" valign="top" style="padding:25px; background-color:#ffffff; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr>
@@ -599,7 +611,7 @@
                                             <table border="0" cellpadding="0" cellspacing="0">
                                                 <tr><td align="left" style="font-family:Arial, sans-serif; font-size:38px; font-weight:900; line-height:34px; color:#000000;">${d.name}</td></tr>
                                                 <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                                <tr><td bgcolor="#000000" style="padding:3px 8px;"><span style="font-family:Arial, sans-serif; font-size:11px; font-weight:900; color:#ffffff; text-transform:uppercase; line-height:11px;">${d.company}</span></td></tr>
+                                                <tr><td bgcolor="#000000" style="padding:3px 8px; background-color:#000000;"><span style="font-family:Arial, sans-serif; font-size:11px; font-weight:900; color:#ffffff; text-transform:uppercase; line-height:11px;">${d.company}</span></td></tr>
                                                 <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                                 <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; line-height:15px; font-weight:bold; color:#000000;">
                                                     ${cond(d.email, `${d.email}<br>`)}${cond(d.web, `${d.web}<br>`)}${cond(d.phone, `${d.phone}`)}
@@ -617,7 +629,7 @@
                     </table>
                 `),
                 manifesto: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" width="480">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" width="480" style="background-color:#000000;">
                         <tr>
                             <td align="left" valign="top" style="padding:25px; color:#ffffff; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -646,7 +658,7 @@
                     </table>
                 `),
                 neo_swiss: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="border-top:12px solid #000000;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="border-top:12px solid #000000; background-color:#ffffff;">
                         <tr>
                             <td align="left" valign="top" style="padding:20px; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
@@ -684,7 +696,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:32px; font-weight:900; color:#000000; line-height:32px;">${d.name}</td></tr>
                                     <tr><td height="5" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td bgcolor="#000000" style="padding:2px 6px;"><span style="font-family:Arial, sans-serif; font-size:11px; font-weight:bold; color:#ffffff; line-height:11px;">${d.company}</span></td></tr>
+                                    <tr><td bgcolor="#000000" style="padding:2px 6px; background-color:#000000;"><span style="font-family:Arial, sans-serif; font-size:11px; font-weight:bold; color:#ffffff; line-height:11px;">${d.company}</span></td></tr>
                                     <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; line-height:16px; color:#666666;">
                                         ${cond(d.email, `MAIL: ${d.email}<br>`)}${cond(d.web, `SITE: ${d.web}<br>`)}${cond(d.phone, `PHNE: ${d.phone}`)}
@@ -695,53 +707,57 @@
                     </table>
                 `),
                 grid_offset: wrap(`
-                    <table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" role="presentation" align="left" style="border-collapse:collapse;">
-                        <tr>
-                            <td align="left" valign="top" style="padding:20px; background-color:#ffffff;">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:9px; font-weight:bold; color:#000000; line-height:10px;">${d.header}</td></tr>
-                                    <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr>
-                                        <td>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td width="20" style="width:20px;">&nbsp;</td>
-                                                    <td align="left">
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:26px; font-weight:900; color:#000000; line-height:26px;">${d.name}</td></tr>
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#000000; line-height:14px;">${d.role} @ ${d.company}</td></tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr><td height="20" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr>
-                                        <td>
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td width="40" style="width:40px;">&nbsp;</td>
-                                                    <td align="left">
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#000000; line-height:18px;">
-                                                                ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
-                                                            </td></tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" style="background-color:#000000;">
+                        <tr><td style="padding:1px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="background-color:#ffffff;">
+                                <tr>
+                                    <td align="left" valign="top" style="padding:20px;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:9px; font-weight:bold; color:#000000; line-height:10px;">${d.header}</td></tr>
+                                            <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td width="20" style="width:20px;">&nbsp;</td>
+                                                            <td align="left">
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:26px; font-weight:900; color:#000000; line-height:26px;">${d.name}</td></tr>
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:11px; color:#000000; line-height:14px;">${d.role} @ ${d.company}</td></tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td height="20" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td width="40" style="width:40px;">&nbsp;</td>
+                                                            <td align="left">
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; color:#000000; line-height:18px;">
+                                                                        ${cond(d.email, `E: ${d.email}<br>`)}${cond(d.web, `W: ${d.web}<br>`)}${cond(d.phone, `P: ${d.phone}`)}
+                                                                    </td></tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
                     </table>
                 `),
                 concrete: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#555555">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#555555" style="background-color:#555555;">
                         <tr>
-                            <td align="left" valign="top" width="12" bgcolor="#000000" style="width:12px; height:100px;">&nbsp;</td>
+                            <td align="left" valign="top" width="12" bgcolor="#000000" style="width:12px; height:100px; background-color:#000000;">&nbsp;</td>
                             <td align="left" valign="top" style="padding:25px; font-family:Arial, sans-serif;">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr><td align="left" style="font-family:Arial, sans-serif; font-size:28px; font-weight:900; color:#ffffff; line-height:28px;">${d.name}</td></tr>
@@ -768,42 +784,46 @@
                     </table>
                 `),
                 hazard: wrap(`
-                    <table border="4" bordercolor="#000000" cellpadding="0" cellspacing="0" role="presentation" align="left" style="border:4px dashed #000000; background-color:#ffffff; border-collapse:separate;">
-                        <tr>
-                            <td align="left" valign="top" style="padding:20px;">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr><td bgcolor="#000000" style="padding:4px 12px;"><span style="color:#ffffff; font-family:Arial, sans-serif; font-size:10px; font-weight:bold; line-height:10px; text-transform:uppercase;">${d.header}</span></td></tr>
-                                    <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr>
-                                        <td>
-                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                <tr>
-                                                    <td align="left" valign="top" style="font-family:Arial, sans-serif;">
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:26px; font-weight:900; color:#000000; text-transform:uppercase; line-height:26px;">${d.name}</td></tr>
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; font-weight:bold; color:#000000; line-height:12px;">${d.role} // ${d.company}</td></tr>
-                                                            <tr><td height="8" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                                            <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; line-height:16px; color:#000000;">E: <u style="color:#000000;">${d.email}</u><br>P: ${d.phone}</td></tr>
-                                                        </table>
-                                                    </td>
-                                                    <td width="15" style="width:15px;">&nbsp;</td>
-                                                    <td align="right" valign="top" width="85">
-                                                        ${cond(d.img, `<img src="${d.img}" width="85" height="85" border="1" bordercolor="#000000" style="display:block;">`)}
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" style="background-color:#000000;">
+                        <tr><td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="background-color:#ffffff; border:1px dashed #000000;">
+                                <tr>
+                                    <td align="left" valign="top" style="padding:20px;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr><td bgcolor="#000000" style="padding:4px 12px; background-color:#000000;"><span style="color:#ffffff; font-family:Arial, sans-serif; font-size:10px; font-weight:bold; line-height:10px; text-transform:uppercase;">${d.header}</span></td></tr>
+                                            <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td align="left" valign="top" style="font-family:Arial, sans-serif;">
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:26px; font-weight:900; color:#000000; text-transform:uppercase; line-height:26px;">${d.name}</td></tr>
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; font-weight:bold; color:#000000; line-height:12px;">${d.role} // ${d.company}</td></tr>
+                                                                    <tr><td height="8" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                                                    <tr><td align="left" style="font-family:Arial, sans-serif; font-size:10px; line-height:16px; color:#000000;">E: <u style="color:#000000;">${d.email}</u><br>P: ${d.phone}</td></tr>
+                                                                </table>
+                                                            </td>
+                                                            <td width="15" style="width:15px;">&nbsp;</td>
+                                                            <td align="right" valign="top" width="85">
+                                                                ${cond(d.img, `<img src="${d.img}" width="85" height="85" border="1" bordercolor="#000000" style="display:block;">`)}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
                     </table>
                 `),
                 rivet: wrap(`
-                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#eeeeee" style="border:1px solid #cccccc;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#eeeeee" style="border:1px solid #cccccc; background-color:#eeeeee;">
                         <tr>
                             <td align="left" valign="top" style="padding:25px; font-family:Arial, sans-serif;">
-                                <table border="0" cellpadding="0" cellspacing="0">
+                                <table border="0" cellpadding="0" cellspacing="0" align="left">
                                     <tr>
                                         <td valign="top" align="left" width="65">
                                             ${cond(d.img, `<img src="${d.img}" width="65" height="65" border="2" bordercolor="#000000" style="display:block;">`)}
@@ -828,7 +848,7 @@
                 cargo: wrap(`
                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left">
                         <tr>
-                            <td align="left" valign="top" bgcolor="#f3f4f6" style="border:1px solid #d1d5db; padding:20px; width:280px;">
+                            <td align="left" valign="top" bgcolor="#f3f4f6" style="border:1px solid #d1d5db; padding:20px; width:280px; background-color:#f3f4f6;">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr><td align="left" style="font-family:Courier, monospace; font-size:10px; color:#6b7280; line-height:12px;">FREIGHT_ID // ${d.header}</td></tr>
                                     <tr><td height="4" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
@@ -837,8 +857,12 @@
                                     <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
                                     <tr>
                                         <td>
-                                            <table border="1" bordercolor="#e5e7eb" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="border-collapse:collapse;">
-                                                <tr><td style="padding:8px; font-family:Courier, monospace; font-size:11px; color:#000000; line-height:14px;">${cond(d.email, `E: ${d.email}<br>`)}${cond(d.phone, `P: ${d.phone}`)}</td></tr>
+                                            <table border="0" cellpadding="0" cellspacing="0" bgcolor="#e5e7eb" style="background-color:#e5e7eb;">
+                                                <tr><td style="padding:1px;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color:#ffffff;">
+                                                        <tr><td style="padding:8px; font-family:Courier, monospace; font-size:11px; color:#000000; line-height:14px;">${cond(d.email, `E: ${d.email}<br>`)}${cond(d.phone, `P: ${d.phone}`)}</td></tr>
+                                                    </table>
+                                                </td></tr>
                                             </table>
                                         </td>
                                     </tr>
@@ -852,31 +876,35 @@
                     </table>
                 `),
                 machinist: wrap(`
-                    <table border="2" bordercolor="#000000" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="border-collapse:collapse;">
-                        <tr>
-                            <td align="left" valign="top" style="padding:20px; font-family:Courier, monospace;">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tr><td bgcolor="#000000" style="padding:2px 8px;"><span style="font-family:Courier, monospace; font-size:10px; color:#ffffff; text-transform:uppercase; line-height:10px;">MACH_REF: ${d.header}</span></td></tr>
-                                    <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Courier, monospace; font-size:22px; font-weight:bold; color:#000000; line-height:22px;">${d.name}</td></tr>
-                                    <tr><td align="left" style="font-family:Courier, monospace; font-size:11px; color:#000000; line-height:14px;">${d.role} // ${d.company}</td></tr>
-                                    <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
-                                    <tr><td align="left" style="font-family:Courier, monospace; font-size:11px; line-height:16px; color:#000000;">
-                                        E: ${d.email}<br>W: ${d.web}<br>P: ${d.phone}
-                                    </td></tr>
-                                </table>
-                            </td>
-                            <td width="10" style="width:10px;">&nbsp;</td>
-                            <td valign="top" align="left" width="90">
-                                ${cond(d.img, `<img src="${d.img}" width="90" height="90" border="0" style="display:block;">`)}
-                            </td>
-                        </tr>
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#000000" style="background-color:#000000;">
+                        <tr><td style="padding:2px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="left" bgcolor="#ffffff" style="background-color:#ffffff;">
+                                <tr>
+                                    <td align="left" valign="top" style="padding:20px; font-family:Courier, monospace;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr><td bgcolor="#000000" style="padding:2px 8px; background-color:#000000;"><span style="font-family:Courier, monospace; font-size:10px; color:#ffffff; text-transform:uppercase; line-height:10px;">MACH_REF: ${d.header}</span></td></tr>
+                                            <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Courier, monospace; font-size:22px; font-weight:bold; color:#000000; line-height:22px;">${d.name}</td></tr>
+                                            <tr><td align="left" style="font-family:Courier, monospace; font-size:11px; color:#000000; line-height:14px;">${d.role} // ${d.company}</td></tr>
+                                            <tr><td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td></tr>
+                                            <tr><td align="left" style="font-family:Courier, monospace; font-size:11px; line-height:16px; color:#000000;">
+                                                E: ${d.email}<br>W: ${d.web}<br>P: ${d.phone}
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                    <td width="10" style="width:10px;">&nbsp;</td>
+                                    <td valign="top" align="left" width="90">
+                                        ${cond(d.img, `<img src="${d.img}" width="90" height="90" border="0" style="display:block;">`)}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
                     </table>
                 `)
             };
 
             const result = styles[type] || wrap(`<tr><td style="padding:20px;">[Design ${type}]</td></tr>`);
-            // PROFESSIONAL MINIFICATION
+            // PROFESSIONAL MINIFICATION: Essential for Gmail length limits and spacing issues.
             return result.replace(/\s+id="[^"]*"/g, '').replace(/\n/g, '').replace(/>\s+</g, '><').trim();
         }
 
